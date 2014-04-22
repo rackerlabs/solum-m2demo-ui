@@ -1,0 +1,34 @@
+SOLUM DJANGO BRIDGE
+
+~ $ curl 192.168.76.11:9001/solum/apps/new -F planfile=@ex1.yaml
+{
+  "app": {
+    "description": "Nodejs express.",
+    "name": "ex1",
+    "uri": "http://10.0.2.15:9777/v1/plans/91ea7074-2a51-4aaf-9089-653ef105681e",
+    "uuid": "91ea7074-2a51-4aaf-9089-653ef105681e"
+  }
+}
+
+~ $ curl 192.168.76.11:9001/solum/assemblies/new -F plan_uri=http://10.0.2.15:9777/v1/plans/91ea7074-2a51-4aaf-9089-653ef105681e -F assembly=foo
+{
+  "assembly": {
+    "application_uri": "None",
+    "description": "None",
+    "name": "foo",
+    "status": "None",
+    "uuid": "8f63acf9-9fb0-41c3-a2b9-186660a22962"
+  }
+}
+
+
+~ $ curl 192.168.76.11:9001/solum/assemblies/8f63acf9-9fb0-41c3-a2b9-186660a22962
+{
+  "assembly": {
+    "application_uri": "None",
+    "description": "None",
+    "name": "foo",
+    "status": "None",
+    "uuid": "8f63acf9-9fb0-41c3-a2b9-186660a22962"
+  }
+}

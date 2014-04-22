@@ -1,0 +1,16 @@
+{
+  "assemblies": [
+{% for assembly in assemblies %}{% if forloop.last %}    {
+      "description": "{{ assembly.description }}",
+      "name": "{{ assembly.name }}",
+      "status": "{{ assembly.status }}",
+      "uuid": "{{ assembly.uuid }}"
+    }{% else %}    {
+      "description": "{{ assembly.description }}",
+      "name": "{{ assembly.name }}",
+      "status": "{{ assembly.status }}",
+      "uuid": "{{ assembly.uuid }}"
+    },{% endif %}{% endfor %}
+  ]
+}
+

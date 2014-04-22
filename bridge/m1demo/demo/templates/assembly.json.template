@@ -1,0 +1,11 @@
+{
+  "assembly": {
+    "application_uri": "{{ assembly.application_uri }}",
+    "description": "{{ assembly.description }}",
+    "name": "{{ assembly.name }}",
+    "status": "{{ assembly.status }}",
+    "uuid": "{{ assembly.uuid }}"
+  }
+}
+
+

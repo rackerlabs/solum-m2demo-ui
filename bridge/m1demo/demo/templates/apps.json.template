@@ -1,0 +1,14 @@
+{
+  "apps": [
+{% for app in apps %}{% if forloop.last %}    {
+      "description": "{{ app.description }}",
+      "name": "{{ app.name }}",
+      "uuid": "{{ app.uuid }}"
+    }{% else %}    {
+      "description": "{{ app.description }}",
+      "name": "{{ app.name }}",
+      "uuid": "{{ app.uuid }}"
+    },{% endif %}{% endfor %}
+  ]
+}
+

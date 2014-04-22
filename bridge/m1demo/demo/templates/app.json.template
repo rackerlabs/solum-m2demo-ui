@@ -1,0 +1,9 @@
+{
+  "app": {
+    "description": "{{ app.description }}",
+    "name": "{{ app.name }}",
+    "uri": "{{ app.uri }}",
+    "uuid": "{{ app.uuid }}"
+  }
+}
+
