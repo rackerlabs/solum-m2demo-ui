@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Solum M2 App Definition Prototype</title>
+Instructions: Drag and drop the icons in the canvas area.  Then right click two separate
+icons to draw a line between them or to remove the connection.<br>
+Rules: Load Balancers connect to Language Packs which connect to Services.<br><br>
+Disclaimer: This is in an early phase still with many 
+known bugs.<br><br>Note: See update list at the bottom of the page.<br>
+
+        <script src="js/createjs-2013.12.12.min.js"></script>
+        <script type="text/javascript" src="./js/solum-appdefine.js"></script>
+
+    </head>
+
+    <body onload="preinit()">
+        <div id="main">
+            <H1>Solum M2 App Definition Prototype</H1>
+            <canvas id="canvas" width="800" height="600" style="background-color:#FFFFFF">
+                <p>Your browser does not support HTML5 Canvas which is required to see this content.</p>
+            </canvas>
+        </div>
+<br><br>
+4/22/2014 Updates:<br>
+* Right clicking both icons which are already connected disconnects them.<br>
+* Icons only glow (gradient green) when connected properly now.<br>
+* Enforcing connection orders now.  Load Balancer -> Language Pack -> Service.<br>
+<br>
+4/23/2014 Updates:<br>
+* Lines now follow icons that are being dragged.<br>
+* Fixed a memory leak problem.<br>
+* Added Nodejs, Newrelic and Memcached icons<br>
+* Rearranged icons with load balancer on the left, language packs on top and services on the right<br>
+* May not connect the original icons on the edges of the screen anymore.<br>
+* Added icon labels<br>
+<br>
+4/24/2014 Updates:<br>
+* Added some very basic physics to move objects around when dragged/dropped while connected to other objects.  Still needs much work, don't look too hard at this yet.
+    </body>
+</html>
