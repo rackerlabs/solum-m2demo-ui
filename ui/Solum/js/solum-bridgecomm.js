@@ -86,6 +86,26 @@ function createAssembly(app_uri, assembly_name) {
     return assembly;
 }
 
+function popAppList() {
+    // Populate the Application (not App/Plan) list of index.html
+    var apps = listAssemblies();
+    var text = "";
+
+    for(var i=0; i < apps.length; i++){
+        var app = apps[i];
+        var appd = getAssembly(app.uuid);
+        var apptext = "<tr>\n<th>" + (i + 1) + "</th>\n";
+        //var apptext = "<tr>\n<th>" + app.uuid + "</th>\n";
+        apptext += "<td>" + app.name + "</td>\n";
+        apptext += "<td>" + app.status + "</td>\n";
+        apptext += "<td>" + appd.application_uri + "</td>\n";
+        apptext += '<td>\n <button class="btn btn-mini btn-sm" style="width:30%">Update</button>\n <button class="btn btn-danger btn-sm" style="width:30%">Manage</button>\n </td>\n<tr>\n';
+        text = text + apptext;
+    }
+
+    $("#AppList").html(text);
+}
+
 function popListApps() {
     var apps = listApps();
     var text = "";
