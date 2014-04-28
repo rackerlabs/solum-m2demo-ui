@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'demo',
+    'solum',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,7 +82,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = "/"
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (
     ("images", "/opt/stack/solum-gui/bridge/m1demo/static/images"),

@@ -5,5 +5,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^solum/', include('demo.urls'), name='solum'),
+    url(r'^solum/', include('solum.urls'), name='solum'),
 )
