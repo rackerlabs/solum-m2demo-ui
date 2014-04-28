@@ -14,11 +14,10 @@
 // * visible rejection of connection
 // * physics -  don't allow objects to move out of canvas
 // * Replace Create.js CDN link with local copy
-// * Right click, disconnect causes objects to move to 0,0 sometimes?
 
 
         // General global variables
-        var canvas, stage, queue, fps, glow_size;
+        var canvas, stage, queue, fps, glow_size, physics_max, plan_dom;
         var glow_start_color, glow_end_color, physics_on, orig_move_obj;
         var mouse_status, last_mouse_obj;
 
@@ -32,6 +31,8 @@
         last_mouse_obj = null;
         physics_on = 0;
         orig_move_obj = null;
+        physics_max = 50; // How many ticks to keep moving objects after release
+
 
         // HTML div id names (like <div id="name">)
         canvas_name = "canvas";
@@ -188,15 +189,62 @@
             create_text("New\nRelic", "15px Arial", 745, 225);
             create_text("Trove", "15px Arial", 740, 328);
             create_text("Memcached", "13px Arial", 723, 428);
-            create_text("Language\nPacks:", "bold 17px Arial", 80, 30);
+            create_text("Language\nPacks:", "bold 17px Arial", 100, 30);
             create_text("Services:", "bold 17px Arial", 722, 120);
+            create_text("Network:", "bold 16px Arial", 2, 220);
 
-
+            // Made the Create Plan button
+            html_button = document.getElementById("plan_button");
+            plan_dom = new createjs.DOMElement(html_button);
+            plan_dom.x = 100;
+            plan_dom.y = 100;
+            plan_dom.htmlElement.onclick = function() {
+// TODO - connect this to the demo later
+                var plan_text = create_plan();
+                if (plan_text.length < 5)
+                    plan_text = "[Empty plan file: No components are connected.]";
+                alert(plan_text);
+            }
 
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);
             createjs.Ticker.addEventListener("tick", tick);
             stage.update();
+        }
+
+
+        function create_plan() {
+            var plan_text = "name: ex1\n";
+            plan_text += "description: Nodejs express.\n";
+            plan_text += "artifacts:\n";
+            plan_text += "- name: nodeus\n";
+            plan_text += "  artifact_type: application.heroku\n";
+            plan_text += "   content:\n"
+            plan_text += "     href: https://github.com/paulczar/example-nodejs-express.git\n";
+            plan_text += "    language_pack: auto\n";
+            
+            plan_text += "\n\n----- Demo Connectivity Data -----\n{\n";
+            for (var i = 0; i < stage.getNumChildren(); i++) {
+                obj = stage.getChildAt(i);
+                if (obj.hasOwnProperty("connection_list")) {
+                    if (obj.connection_list.length > 0) {
+                        plan_text += "\t\"" + obj.icon_name + "_" + obj.id + "\": [";
+                        prev_entry = false;
+                        for (var j = 0; j < obj.connection_list.length; j++) {
+                            if (prev_entry == false) {
+                                prev_entry = true;
+                            } else {
+                                plan_text += ", ";
+                            }
+                            plan_text += "\"" + obj.connection_list[j][0].icon_name +
+                                "_" + obj.connection_list[j][0].id + "\"";
+                        }
+                        plan_text += "],\n";
+                    }
+                }
+            }
+            plan_text += "}";
+            return plan_text;
         }
 
 
@@ -316,7 +364,7 @@
                             if (num_connections(evnt.currentTarget) > 0) {
                                 orig_move_obj = evnt.currentTarget;
                                 evnt.currentTarget.speed = 0;
-                                physics_on = 100;
+                                physics_on = physics_max;
                             }
                         }
 
@@ -481,7 +529,6 @@
 
         function tick() {
             if (physics_on > 0) {
-                //physics_on = false;
                 physics_on -= 1;
                 perform_force_movement(orig_move_obj);
                 for (var i = 0; i < num_connections(orig_move_obj); i++) {
