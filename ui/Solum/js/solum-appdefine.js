@@ -208,12 +208,13 @@
 
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);
-            createjs.Ticker.addEventListener("tick", tick);
+            createjs.Ticker.addEventListener("tick", solum_tick);
             stage.update();
         }
 
 
         function create_plan() {
+// TODO remove hard coded crud
             var plan_text = "name: ex1\n";
             plan_text += "description: Nodejs express.\n";
             plan_text += "artifacts:\n";
@@ -527,7 +528,7 @@
         }
 
 
-        function tick() {
+        function solum_tick() {
             if (physics_on > 0) {
                 physics_on -= 1;
                 perform_force_movement(orig_move_obj);
