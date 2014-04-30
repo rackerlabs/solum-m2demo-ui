@@ -1,26 +1,183 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Solum M2 App Definition Prototype</title>
-Instructions: Drag and drop the icons in the canvas area.  Then right click two separate
-icons to draw a line between them or to remove the connection.<br>
-Rules: Load Balancers connect to Language Packs which connect to Services.<br><br>
 
-        <script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
-        <script type="text/javascript" src="./js/solum-appdefine.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        @charset "UTF-8";
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide {
+            display: none !important;
+        }
+        ng\:form {
+            display: block;
+        }
+        .ng-animate-start {
+            clip: rect(0, auto, auto, 0);
+            -ms-zoom: 1.0001;
+        }
+        .ng-animate-active {
+            clip: rect(-1px, auto, auto, 0);
+            -ms-zoom: 1;
+        }
+    </style>
 
-    </head>
 
-    <body onload="solum_preinit()">
-        <div id="main">
-            <H1>Solum M2 App Definition Prototype</H1>
-            <canvas id="canvas" width="800" height="600" style="background-color:#FFFFFF">
-                <p>Your browser does not support HTML5 Canvas which is required to see this content.</p>
-            </canvas>
+    <title>Usage Overview - OpenStack Dashboard</title>
+    <link rel="stylesheet" href="./js/horizon/e2176743197d.css" type="text/css" media="screen">
+    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+    <script src="./js/createjs-2013.12.12.min.js"></script>
+    <script type="text/javascript" src="./js/solum-appdefine.js"></script>
+    <script type="text/javascript" src="./js/horizon/e1c20c29fbb2.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        /*
+    Added so that we can append Horizon scoped JS events to
+    the DOM load events without running in to the "horizon"
+    name-space not currently being defined since we load the
+    scripts at the bottom of the page.
+    */
+        var addHorizonLoadEvent = function (func) {
+            var old_onload = window.onload;
+
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    old_onload();
+                    func();
+                }
+            }
+        }
+    </script>
+    <style></style>
+</head>
+
+<body ng-app="hz" class="ng-scope" onload="solum_preinit()">
+    <div id="container">
+        <div class="topbar">
+            <h1 class="brand"><a href="http://localhost:8080/home/">OpenStack Dashboard</a></h1>
+            <div class="context-box">
+                <div id="tenant_switcher" class="dropdown switcher_bar" tabindex="1">
+                    <h3>service</h3>
+                </div>
+            </div>
+            <div id="user_info" class="pull-right">
+                <div id="profile_editor_switcher" class="dropdown switcher_bar" tabindex="1">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="http://localhost:8080/admin/#profile_editor_switcher">
+                        <div>solum</div>
+                    </a>
+                    <ul id="editor_list" class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><a href="http://localhost:8080/settings/">Settings</a>
+                        </li>
+                        <li><a href="http://docs.openstack.org/" target="_new">Help</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="http://localhost:8080/auth/logout/">Sign Out</a>
+            </div>
         </div>
+        <div id="main_content">
+            <div class="messages">
+            </div>
+            <div class="sidebar">
+                <div>
+                    <dl class="nav_accordion">
+                        <dt class="active">
+                            <div>Project</div>
+                        </dt>
+                        <dd>
+                            <div>
+                                <h4 class=""><div>Compute</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="http://localhost:8080/project/" tabindex="1">Overview</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/instances/" tabindex="2">Instances</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/volumes/" tabindex="3">Volumes</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/images/" tabindex="4">Images</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/access_and_security/" tabindex="5">Access &amp; Security</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><div>Orchestration</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="http://localhost:8080/project/stacks/" tabindex="1">Stacks</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><div>Solum</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="./index.html" tabindex="1">Applications</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                        <dt class="">
+                            <div>Admin</div>
+                        </dt>
+                        <dd style="display: none;">
+                            <div>
+                                <h4 class=""><div>System Panel</div></h4>
+                                <ul>
+                                    <li><a href="./Horizon_dashboard_files/Horizon_dashboard.html" class="active" tabindex="1">Overview</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/hypervisors/" tabindex="2">Hypervisors</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/aggregates/" tabindex="3">Host Aggregates</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/instances/" tabindex="4">Instances</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/volumes/" tabindex="5">Volumes</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/flavors/" tabindex="6">Flavors</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/images/images/" tabindex="7">Images</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/info/" tabindex="8">System Info</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><div>Identity Panel</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="http://localhost:8080/admin/projects/" tabindex="1">Projects</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/users/" tabindex="2">Users</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="content_body">
+                <canvas id="canvas" width="800" height="600" style="background-color:#FFFFFF">
+                    <p>Your browser does not support HTML5 Canvas which is required to see this content.</p>
+                </canvas>
+            </div>
 
-        <button id="plan_button" type="button"><b>Generate Plan</b></button>
-<br><br>
-    </body>
+            <button id="plan_button" type="button"><b>Generate Plan</b>
+            </button>
+        </div>
+    </div>
+    <div id="footer">
+    </div>
+    <script type="text/javascript" src="./js/horizon/saved_resource"></script>
+    <script type="text/javascript" src="./js/horizon/0218443f736a.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        // Call init on DOM ready.
+        $(document).ready(horizon.init);
+    </script>
+</body>
+
 </html>
