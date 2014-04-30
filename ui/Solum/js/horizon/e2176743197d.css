@@ -3065,7 +3065,7 @@ input[type="submit"].btn.small {
     -ms-transition: opacity .3s linear, top .3s ease-out;
     -o-transition: opacity .3s linear, top .3s ease-out;
     transition: opacity .3s linear, top .3s ease-out;
-    top: -25%;
+    top: 25%;
 }
 .modal.fade.in {
     top: 50%;
@@ -3845,7 +3845,7 @@ a.thumbnail:hover {
     background-color: #f0f0f0;
     background-repeat: no-repeat;
     background-position: 96% center;
-    background-image: url('/static/dashboard/img/right_droparrow.png');
+    background-image: url('../../images/right_droparrow.png');
     padding: 10px 0 10px 0;
     line-height: 16px;
     margin-top: 0;
@@ -3872,7 +3872,7 @@ a.thumbnail:hover {
 .nav_accordion dt h4.active,
 .nav_accordion dd h4.active {
     border-bottom: 1px solid #bbbbbb;
-    background-image: url('/static/dashboard/img/drop_arrow.png');
+    background-image: url('../../images/drop_arrow.png');
 }
 .nav_accordion dt a,
 .nav_accordion dd a {
@@ -3926,7 +3926,7 @@ a.thumbnail:hover {
     background-color: #e5e5e5;
     background-repeat: no-repeat;
     background-position: 96% center;
-    background-image: url('/static/dashboard/img/right_droparrow.png');
+    background-image: url('../../images/right_droparrow.png');
     padding-right: 16px;
     max-width: 217px;
     cursor: pointer;
@@ -3944,7 +3944,7 @@ a.thumbnail:hover {
     max-width: 201px;
 }
 .nav_accordion dt.active {
-    background-image: url('/static/dashboard/img/drop_arrow.png');
+    background-image: url('../../images/drop_arrow.png');
 }
 .nav_accordion dt:first-child {
     border-top: 0;
@@ -4019,7 +4019,7 @@ dt {
     margin-bottom: 0;
     margin-right: 10px;
     padding: 0;
-    background-image: url('/static/dashboard/img/drop_arrow.png');
+    background-image: url('../../images/drop_arrow.png');
     background-color: #eeeeee;
     background-repeat: no-repeat;
     border: 1px solid #cccccc;
@@ -4063,7 +4063,7 @@ dt {
     max-width: 200px;
     vertical-align: top;
     white-space: nowrap;
-    background-image: url('/static/dashboard/img/profile_drop.png');
+    background-image: url('../../images/profile_drop.png');
     background-repeat: no-repeat;
     background-position: right center;
 }
@@ -4092,7 +4092,7 @@ h2 {
     font-weight: normal;
 }
 #splash .login {
-    background: url('/static/dashboard/img/logo-splash.png') no-repeat center 35px;
+    background: url('../../images/logo-splash.png') no-repeat center 35px;
     position: absolute;
     top: 80px;
     left: 50%;
@@ -4154,7 +4154,7 @@ h1.brand {
     margin: 0;
 }
 h1.brand a {
-    background: url('/Horizon_dashboard_files/SolumUI/SolumUI/SolumDemoUI/images/openstack_logo.png') top left no-repeat;
+    background: url('../../images/openstack_logo.png') top left no-repeat;
     display: block;
     float: left;
     width: 216px;
@@ -4186,7 +4186,7 @@ a.current_item:hover h4 {
 .sidebar .switcher_bar a.dropdown-toggle {
     display: block;
     padding: 5px 0;
-    background-image: url('/static/dashboard/img/drop_arrow.png');
+    background-image: url('../../images/drop_arrow.png');
     border: 1px solid #c0d9e4;
     background-color: #e9f5fa;
     background-repeat: no-repeat;
@@ -4358,10 +4358,10 @@ a.current_item:hover h4 {
     background-position: 98% center;
 }
 .table th.headerSortDown {
-    background-image: url('/static/dashboard/img/drop_arrow.png');
+    background-image: url('../../images/drop_arrow.png');
 }
 .table th.headerSortUp {
-    background-image: url('/static/dashboard/img/up_arrow.png');
+    background-image: url('../../images/up_arrow.png');
 }
 .table tr.summation td:first-child,
 .table tr.summation td:last-child {
@@ -4473,7 +4473,7 @@ table form {
     display: inline-block;
 }
 .table_search input {
-    background: url('/static/dashboard/img/search.png') no-repeat 195px 5px;
+    background: url('../../images/search.png') no-repeat 195px 5px;
     display: inline-block;
     margin-bottom: 0;
 }
@@ -4786,7 +4786,7 @@ div.table_cell_wrapper .inline-edit-status .loading:before {
     margin-top: 0px;
     *margin-right: .3em;
     line-height: 14px;
-    background-image: url('/static/dashboard/img/spinner.gif');
+    background-image: url('../../images/spinner.gif');
     background-position: 0px 0px;
     background-repeat: no-repeat;
     position: absolute;
@@ -5224,7 +5224,7 @@ tr.terminated {
     font-weight: bold;
     color: #555555;
     cursor: pointer;
-    background-image: url('/static/dashboard/img/right_droparrow.png');
+    background-image: url('../../images/right_droparrow.png');
     background-repeat: no-repeat;
     background-position: 130px center;
 }
@@ -5232,7 +5232,7 @@ tr.terminated {
     width: 334px;
     margin-bottom: 10px;
     border-bottom: solid 1px #dddddd;
-    background-image: url('/static/dashboard/img/drop_arrow.png');
+    background-image: url('../../images/drop_arrow.png');
 }
 form div.clearfix.error {
     width: 308px;
@@ -5279,7 +5279,7 @@ form .form-field.required > label:after {
     margin-top: -10px;
 }
 #region_selector li:first-child p {
-    background: #ededed url('/static/dashboard/img/drop_arrow.png') no-repeat 106px 9px !important;
+    background: #ededed url('../../images/drop_arrow.png') no-repeat 106px 9px !important;
     display: block;
     border: 1px solid #e1e1e1;
     padding: 5px;
@@ -5472,7 +5472,7 @@ label.log-length {
     float: left;
 }
 .membership input {
-    background: url('/static/dashboard/img/search.png') no-repeat 105px 5px whiteSmoke;
+    background: url('../../images/search.png') no-repeat 105px 5px whiteSmoke;
 }
 .membership .fake_table_header {
     background-color: #ffffff;
@@ -5741,7 +5741,7 @@ label.log-length {
     border-radius: 3px;
     cursor: move;
     padding-left: 23px;
-    background: #ffffff url('/static/dashboard/img/drag.png') no-repeat 11px 50%;
+    background: #ffffff url('../../images/drag.png') no-repeat 11px 50%;
 }
 .networklist li em {
     font-size: 0.5em;
@@ -6154,7 +6154,7 @@ label.log-length {
     border-radius: 3px;
     cursor: move;
     padding-left: 23px;
-    background: #ffffff url('/static/dashboard/img/drag.png') no-repeat 11px 50%;
+    background: #ffffff url('../../images/drag.png') no-repeat 11px 50%;
 }
 .rulelist li em {
     font-size: 0.5em;
