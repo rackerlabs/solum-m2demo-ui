@@ -46,6 +46,7 @@
             checkurl(textval)
         }
     </script>
+    <script src="js/solum-bridgecomm.js"></script>
     <script type="text/javascript" src="./js/horizon/e1c20c29fbb2.js"></script>
     <script type="text/javascript" charset="utf-8">
         /*
@@ -184,37 +185,9 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>MyJavaApp</td>
-                            <td>Running</td>
-                            <td>http://www.solum.io/MyJavaApp</td>
-                            <td>
-                                <button class="btn btn-mini btn-sm" style="width:30%">Update</button>
-                                <button class="btn btn-mini btn-sm" style="width:30%">Manage</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>MyPythonApp</td>
-                            <td>Stopped</td>
-                            <td>http://www.solum.io/MyPythonApp</td>
-                            <td>
-                                <button class="btn btn-mini btn-sm" style="width:30%">Update</button>
-                                <button class="btn btn-mini btn-sm" style="width:30%">Manage</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>MyRubyApp</td>
-                            <td>Build Failed</td>
-                            <td>http://www.solum.io/MyRubyApp</td>
-                            <td>
-                                <button class="btn btn-mini btn-sm" style="width:30%">Update</button>
-                                <button class="btn btn-mini btn-sm" style="width:30%">Manage</button>
-                            </td>
-                        </tr>
+                    <tbody id="AppList">
+                    </tbody>
+                    <tfoot>
                         <tr>
                             <th></th>
                             <td></td>
@@ -225,7 +198,8 @@
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New App</button>
                             </td>
                         </tr>
-                    </tbody>
+
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -261,6 +235,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        popAppList();
+    </script>
 
 </body>
 
