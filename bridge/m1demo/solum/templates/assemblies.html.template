@@ -1,108 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Solum - OpenStack</title>
+<html>
 
-    <!-- Bootstrap -->
-    <link href="/static/js/bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        @charset "UTF-8";
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide {
+            display: none !important;
+        }
+        ng\:form {
+            display: block;
+        }
+        .ng-animate-start {
+            clip: rect(0, auto, auto, 0);
+            -ms-zoom: 1.0001;
+        }
+        .ng-animate-active {
+            clip: rect(-1px, auto, auto, 0);
+            -ms-zoom: 1;
+        }
+    </style>
+
+
+    <title>Usage Overview - OpenStack Dashboard</title>
+    <link rel="stylesheet" href="/static/js/horizon/e2176743197d.css" type="text/css" media="screen">
     <script src="/static/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-    <script src="/static/js/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
     <script>
-        function checkurl(str) {  
-            if ((str.toLowerCase() == "github.com/demo"))
-            {
-                console.log("github with plan...");
-                window.location = '/solum/app/00000000-0000-0000-0000-000000000000';
-            }
-            else
-            {
-                console.log("no plan!");
-                window.location = '/solum/newapp?git=' + str;
+        function checkurl(str) {
+            if ((str.toUpperCase() == "GITHUB.COM/DEMO")) {
+                window.location = '/ui/Solum/AppManage.html';
+            } else {
+                window.location = '/ui/Solum/AppDefineCanvas.html';
             }
         }
-        
-        function getvalue(){
+
+        function getvalue() {
             var textval = $('#githuburl').val()
             console.log(textval)
             checkurl(textval)
         }
     </script>
-    <script src="/static/js/solum-bridgecomm.js"></script>
-  </head>
-  <body>
-    <div class="container" id="home">
-        <tr><h2 align="center">Solum Dashboard</h2></tr>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>App Name</th>
-                    <th>Status</th>		
-                    <th>App URL</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-{% for a in assemblies %}
-                <tr>
-                    <td><b>{{ forloop.counter }}</b></td>
-                    <td>{{ a.name }}</td>
-                    <td>{{ a.status }}</td>
-                    <td><a href="{{ a.application_uri }}">{{ a.application_uri }}</a></td>
-                    <td>
-                        <a href="/solum/app/{{ a.uuid }}">
-                            <button class="btn btn-mini btn-sm" style="color: #fff;width:30%">Update</button>
-                            <button class="btn btn-danger btn-sm" style="width:30%">Manage</button>
-                        </a>
-                    </td>
-                </tr>
-{% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>		
-                    <td></td>
-                    <td>
-                        <button class="btn btn-default btn-sm invisible" style="width:30%">Update</button>  
-                        <button class="btn btn-primary btn-sm" style="width:30%" 
-                                data-toggle="modal" data-target="#myModal">New App</button>
-                    </td>
-                </tr>
+    <script src="js/solum-bridgecomm.js"></script>
+    <script type="text/javascript" src="/static/js/horizon/e1c20c29fbb2.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        /*
+        Added so that we can append Horizon scoped JS events to
+        the DOM load events without running in to the "horizon"
+        name-space not currently being defined since we load the
+        scripts at the bottom of the page.
+        */
+        var addHorizonLoadEvent = function (func) {
+            var old_onload = window.onload;
 
-            </tfoot>
-        </table>
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    old_onload();
+                    func();
+                }
+            }
+        }
+    </script>
+    <style></style>
+</head>
+
+<body ng-app="hz" class="ng-scope">
+    <div id="container">
+        <div class="topbar">
+            <h1 class="brand"><a href="http://localhost:8080/home/">OpenStack Dashboard</a></h1>
+            <div class="context-box">
+                <div id="tenant_switcher" class="dropdown switcher_bar" tabindex="1">
+                    <h3>service</h3>
+                </div>
+            </div>
+            <div id="user_info" class="pull-right">
+                <div id="profile_editor_switcher" class="dropdown switcher_bar" tabindex="1">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="http://localhost:8080/admin/#profile_editor_switcher">
+                        <div>solum</div>
+                    </a>
+                    <ul id="editor_list" class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><a href="http://localhost:8080/settings/">Settings</a>
+                        </li>
+                        <li><a href="http://docs.openstack.org/" target="_new">Help</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="http://localhost:8080/auth/logout/">Sign Out</a>
+            </div>
+        </div>
+        <div id="main_content">
+            <div class="messages">
+            </div>
+            <div class="sidebar">
+                <div>
+                    <dl class="nav_accordion">
+                        <dt class="active">
+                            <div>Project</div>
+                        </dt>
+                        <dd>
+                            <div>
+                                <h4 class=""><div>Compute</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="http://localhost:8080/project/" tabindex="1">Overview</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/instances/" tabindex="2">Instances</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/volumes/" tabindex="3">Volumes</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/images/" tabindex="4">Images</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/project/access_and_security/" tabindex="5">Access &amp; Security</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><div>Orchestration</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="http://localhost:8080/project/stacks/" tabindex="1">Stacks</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><div>Solum</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="/solum" tabindex="1">Applications</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                        <dt class="">
+                            <div>Admin</div>
+                        </dt>
+                        <dd style="display: none;">
+                            <div>
+                                <h4 class=""><div>System Panel</div></h4>
+                                <ul>
+                                    <li><a href="./Horizon_dashboard_files/Horizon_dashboard.html" class="active" tabindex="1">Overview</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/hypervisors/" tabindex="2">Hypervisors</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/aggregates/" tabindex="3">Host Aggregates</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/instances/" tabindex="4">Instances</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/volumes/" tabindex="5">Volumes</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/flavors/" tabindex="6">Flavors</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/images/images/" tabindex="7">Images</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/info/" tabindex="8">System Info</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><div>Identity Panel</div></h4>
+                                <ul style="display: none;">
+                                    <li><a href="http://localhost:8080/admin/projects/" tabindex="1">Projects</a>
+                                    </li>
+                                    <li><a href="http://localhost:8080/admin/users/" tabindex="2">Users</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="content_body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>App Name</th>
+                            <th>Status</th>
+                            <th>App URL</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in assemblies %}
+                        <tr>
+                            <td><b>{{ forloop.counter }}</b>
+                            </td>
+                            <td>{{ a.name }}</td>
+                            <td>{{ a.status }}</td>
+                            <td><a href="{{ a.application_uri }}">{{ a.application_uri }}</a>
+                            </td>
+                            <td>
+                                <a href="/solum/app/{{ a.uuid }}">
+                                    <button class="btn btn-mini btn-sm" style="color: #fff;width:30%">Update</button>
+                                    <button class="btn btn-danger btn-sm" style="width:30%">Manage</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-default btn-sm invisible" style="width:30%">Update</button>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New App</button>
+                            </td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
-      
-      
+
+    <div id="footer">
+    </div>
+
+    <script type="text/javascript" src="./js/horizon/saved_resource"></script>
+    <script type="text/javascript" src="./js/horizon/0218443f736a.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        // Call init on DOM ready.
+        $(document).ready(horizon.init);
+    </script>
+
     <!-- Modal window for github url entry -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-         aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" 
-                            data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Create a new App</h4>
                 </div>
                 <div class="modal-body" style="white-space:nowrap">
                     <label for="githuburl">GitHub URL</label>
-                    <input type="text" class="form-control"
-                           id="githuburl" placeholder="Enter GitHub URL">
+                    <input type="text" class="form-control" id="githuburl" placeholder="Enter GitHub URL">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" 
-                            data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" 
-                            onclick="getvalue()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="getvalue()">Save</button>
                 </div>
             </div>
         </div>
-      </div>
-  </body>
-</html>
+    </div>
 
+</body>
+
+</html>

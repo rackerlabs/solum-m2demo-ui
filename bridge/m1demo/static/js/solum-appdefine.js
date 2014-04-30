@@ -11,14 +11,13 @@
 // TODO:
 // * bigger icon hitboxes --- just color in white instead of translucent in icons
 // * delete icon or reset button?
-// * visible rejection of connection
-// * physics -  don't allow objects to move out of canvas
+// * visible rejection of bad connections
+// * physics -  don't allow objects to move out of canvas or get too close to other objs
 // * Replace Create.js CDN link with local copy
-// * Right click, disconnect causes objects to move to 0,0 sometimes?
 
 
         // General global variables
-        var canvas, stage, queue, fps, glow_size;
+        var canvas, stage, queue, fps, glow_size, physics_max, plan_dom;
         var glow_start_color, glow_end_color, physics_on, orig_move_obj;
         var mouse_status, last_mouse_obj;
 
@@ -32,6 +31,8 @@
         last_mouse_obj = null;
         physics_on = 0;
         orig_move_obj = null;
+        physics_max = 50; // How many ticks to keep moving objects after release
+
 
         // HTML div id names (like <div id="name">)
         canvas_name = "canvas";
@@ -110,7 +111,7 @@
 
 
 
-        function preinit() {
+        function solum_preinit() {
             canvas = document.getElementById(canvas_name);
             // Prevent right clicking window from bringing up a browswer menu
             canvas.oncontextmenu = function(e) {
@@ -121,7 +122,7 @@
 
             // Load all files and resources
             queue = new createjs.LoadQueue(false);
-            queue.addEventListener("complete", init);
+            queue.addEventListener("complete", solum_init);
             queue.loadManifest([
                 {id:python_name, src:python_icon},
                 {id:trove_name, src:trove_icon},
@@ -135,19 +136,19 @@
         }
 
 
-        function init() {
+        function solum_init() {
             // Create the icon/draggers - Load Balancer first
-            create_icon(lb_name, lb_x, lb_y, lb_x_scale, lb_y_scale, lb_conn_type);
+            solum_create_icon(lb_name, lb_x, lb_y, lb_x_scale, lb_y_scale, lb_conn_type);
             // Language Packs
-            create_icon(python_name, python_x, python_y, python_x_scale, python_y_scale, python_conn_type);
-            create_icon(java_name, java_x, java_y, java_x_scale, java_y_scale, java_conn_type);
-            create_icon(ruby_name, ruby_x, ruby_y, ruby_x_scale, ruby_y_scale, ruby_conn_type);
-            create_icon(nodejs_name, nodejs_x, nodejs_y, nodejs_x_scale, nodejs_y_scale, nodejs_conn_type);
+            solum_create_icon(python_name, python_x, python_y, python_x_scale, python_y_scale, python_conn_type);
+            solum_create_icon(java_name, java_x, java_y, java_x_scale, java_y_scale, java_conn_type);
+            solum_create_icon(ruby_name, ruby_x, ruby_y, ruby_x_scale, ruby_y_scale, ruby_conn_type);
+            solum_create_icon(nodejs_name, nodejs_x, nodejs_y, nodejs_x_scale, nodejs_y_scale, nodejs_conn_type);
             // Services
-            create_icon(trove_name, trove_x, trove_y, trove_x_scale, trove_y_scale, trove_conn_type);
-            create_icon(memcache_name, memcache_x, memcache_y, memcache_x_scale,
+            solum_create_icon(trove_name, trove_x, trove_y, trove_x_scale, trove_y_scale, trove_conn_type);
+            solum_create_icon(memcache_name, memcache_x, memcache_y, memcache_x_scale,
                 memcache_y_scale, memcache_conn_type);
-            create_icon(newrelic_name, newrelic_x, newrelic_y, newrelic_x_scale,
+            solum_create_icon(newrelic_name, newrelic_x, newrelic_y, newrelic_x_scale,
                 newrelic_y_scale, newrelic_conn_type);
 
             var rect = new createjs.Shape();
@@ -170,37 +171,85 @@
 
 
             // Set up labels and some lines
-            draw_line(0, 0, 800, 0, "black", 3);
-            draw_line(0, 0, 0, 800, "black", 3);
-            draw_line(0, 600, 800, 600, "black", 3);
-            draw_line(800, 0, 800, 600, "black", 3);
+            solum_draw_line(0, 0, 800, 0, "black", 3);
+            solum_draw_line(0, 0, 0, 800, "black", 3);
+            solum_draw_line(0, 600, 800, 600, "black", 3);
+            solum_draw_line(800, 0, 800, 600, "black", 3);
 
-            draw_line(70, 85, 720, 85, "black", 1);
-            draw_line(70, 85, 70, 600, "black", 1);
-            draw_line(720, 85, 720, 600, "black", 1);
+            solum_draw_line(70, 85, 720, 85, "black", 1);
+            solum_draw_line(70, 85, 70, 600, "black", 1);
+            solum_draw_line(720, 85, 720, 600, "black", 1);
 
             
-            create_text("Python 2.7", "17px Arial", 210, 65);
-            create_text("Java 7", "17px Arial", 328, 65);
-            create_text("Ruby 2.1.1", "17px Arial", 410, 65);
-            create_text("Node.js 0.10.26", "17px Arial", 505, 65);
-            create_text("Load\nBalancer", "15px Arial", 7, 330);
-            create_text("New\nRelic", "15px Arial", 745, 225);
-            create_text("Trove", "15px Arial", 740, 328);
-            create_text("Memcached", "13px Arial", 723, 428);
-            create_text("Language\nPacks:", "bold 17px Arial", 80, 30);
-            create_text("Services:", "bold 17px Arial", 722, 120);
+            solum_create_text("Python 2.7", "17px Arial", 210, 65);
+            solum_create_text("Java 7", "17px Arial", 328, 65);
+            solum_create_text("Ruby 2.1.1", "17px Arial", 410, 65);
+            solum_create_text("Node.js 0.10.26", "17px Arial", 505, 65);
+            solum_create_text("Load\nBalancer", "15px Arial", 7, 330);
+            solum_create_text("New\nRelic", "15px Arial", 745, 225);
+            solum_create_text("Trove", "15px Arial", 740, 328);
+            solum_create_text("Memcached", "13px Arial", 723, 428);
+            solum_create_text("Language\nPacks:", "bold 17px Arial", 100, 30);
+            solum_create_text("Services:", "bold 17px Arial", 722, 120);
+            solum_create_text("Network:", "bold 16px Arial", 2, 220);
 
-
+            // Made the Create Plan button
+            html_button = document.getElementById("plan_button");
+            plan_dom = new createjs.DOMElement(html_button);
+            plan_dom.x = 100;
+            plan_dom.y = 100;
+            plan_dom.htmlElement.onclick = function() {
+// TODO - connect this to the demo later
+                var plan_text = solum_create_plan();
+                if (plan_text.length < 5)
+                    plan_text = "[Empty plan file: No components are connected.]";
+                alert(plan_text);
+            }
 
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);
-            createjs.Ticker.addEventListener("tick", tick);
+            createjs.Ticker.addEventListener("tick", solum_tick);
             stage.update();
         }
 
 
-        function draw_line(start_x, start_y, end_x, end_y, color, stroke) {
+        function solum_create_plan() {
+// TODO remove hard coded crud
+            var plan_text = "name: ex1\n";
+            plan_text += "description: Nodejs express.\n";
+            plan_text += "artifacts:\n";
+            plan_text += "- name: nodeus\n";
+            plan_text += "  artifact_type: application.heroku\n";
+            plan_text += "   content:\n"
+            plan_text += "     href: https://github.com/paulczar/example-nodejs-express.git\n";
+            plan_text += "    language_pack: auto\n";
+            
+            plan_text += "\n\n----- Demo Connectivity Data -----\n{\n";
+            for (var i = 0; i < stage.getNumChildren(); i++) {
+                obj = stage.getChildAt(i);
+                if (obj.hasOwnProperty("connection_list")) {
+                    if (obj.connection_list.length > 0) {
+                        plan_text += "\t\"" + obj.icon_name + "_" + obj.id + "\": [";
+                        prev_entry = false;
+                        for (var j = 0; j < obj.connection_list.length; j++) {
+                            if (prev_entry == false) {
+                                prev_entry = true;
+                            } else {
+                                plan_text += ", ";
+                            }
+                            plan_text += "\"" + obj.connection_list[j][0].icon_name +
+                                "_" + obj.connection_list[j][0].id + "\"";
+                        }
+                        plan_text += "],\n";
+                    }
+                }
+            }
+            plan_text += "}";
+            return plan_text;
+        }
+
+
+        function solum_draw_line(start_x, start_y, end_x, end_y, color, stroke) {
             var line = new createjs.Shape();
             line.graphics.setStrokeStyle(stroke);
             line.graphics.beginStroke(color);
@@ -211,7 +260,7 @@
         }
 
 
-        function create_text(text, style, x, y) {
+        function solum_create_text(text, style, x, y) {
             var label = new createjs.Text(text, style);
             label.x = x;
             label.y = y;
@@ -219,7 +268,7 @@
         }
 
 
-        function create_icon(icon_name, x_pos, y_pos, x_scale, y_scale, conn_type) {
+        function solum_create_icon(icon_name, x_pos, y_pos, x_scale, y_scale, conn_type) {
             var bmp = new createjs.Bitmap(queue.getResult(icon_name));
             bmp.scaleX = x_scale;
             bmp.scaleY = y_scale;
@@ -250,7 +299,7 @@
                 mouse_status = 3; // pressmove
                 evt.currentTarget.x = evt.stageX;
                 evt.currentTarget.y = evt.stageY;
-                redraw_all_lines(evt.currentTarget); // causes continuous line updates
+                solum_redraw_all_lines(evt.currentTarget); // causes continuous line updates
                 stage.update();
             });
             dragger.addEventListener("mousedown", function(evnt) {
@@ -268,14 +317,14 @@
                         physics_on = 0;
                         
                         // Connect or disconnect two objects
-                        ret_array = objects_are_connected(evnt.currentTarget,
+                        ret_array = solum_objects_are_connected(evnt.currentTarget,
                             last_mouse_obj);
                         if (ret_array[0] == true) {
-                            remove_line_between_objects(evnt.currentTarget, last_mouse_obj,
+                            solum_remove_line_between_objects(evnt.currentTarget, last_mouse_obj,
                                 ret_array[1], ret_array[2]);
-                            remove_connection(evnt.currentTarget, last_mouse_obj);
+                            solum_remove_connection(evnt.currentTarget, last_mouse_obj);
                         } else {
-                            create_line(evnt.currentTarget, last_mouse_obj, true);
+                            solum_create_line(evnt.currentTarget, last_mouse_obj, true);
                             evnt.currentTarget.predrag_x = evnt.currentTarget.x;
                             evnt.currentTarget.predrag_y = evnt.currentTarget.y;
                             console.log("Setting " + evnt.currentTarget.icon_name +
@@ -310,18 +359,18 @@
                             // so create a new one this first time only.
                             obj = evnt.currentTarget;
                             obj.has_moved = true;
-                            create_icon(obj.icon_name, obj.orig_x, obj.orig_y,
+                            solum_create_icon(obj.icon_name, obj.orig_x, obj.orig_y,
                                 obj.x_scale, obj.y_scale, obj.conn_type);
                         } else {
-                            if (num_connections(evnt.currentTarget) > 0) {
+                            if (solum_num_connections(evnt.currentTarget) > 0) {
                                 orig_move_obj = evnt.currentTarget;
                                 evnt.currentTarget.speed = 0;
-                                physics_on = 100;
+                                physics_on = physics_max;
                             }
                         }
 
                         // Remove old lines and draw new ones if needed
-                        redraw_all_lines(evnt.currentTarget);
+                        solum_redraw_all_lines(evnt.currentTarget);
                     }
 
                     mouse_status = 2; // mouse up
@@ -332,7 +381,7 @@
         }
 
 
-        function create_line(src_obj, dest_obj, validate) {
+        function solum_create_line(src_obj, dest_obj, validate) {
             var dist = 0;
             if (validate == true) { // Initial creation
                 var src_conn_type, dest_conn_type, num_src_conn, num_dest_conn;
@@ -356,7 +405,7 @@
                     return;
                 }
 
-                dist = calc_distance(src_obj.x, src_obj.y, dest_obj.x, dest_obj.y);
+                dist = solum_calc_distance(src_obj.x, src_obj.y, dest_obj.x, dest_obj.y);
                 src_obj.orig_conn_list.push([dest_obj, dist]);
                 dest_obj.orig_conn_list.push([src_obj, dist]);
             }
@@ -368,23 +417,23 @@
             line.graphics.lineTo(dest_obj.x, dest_obj.y);
             line.graphics.endStroke();
             // Metadata
-            dist = calc_distance(src_obj.x, src_obj.y, dest_obj.x, dest_obj.y);
+            dist = solum_calc_distance(src_obj.x, src_obj.y, dest_obj.x, dest_obj.y);
             src_obj.connection_list.push([dest_obj, line]);
             dest_obj.connection_list.push([src_obj, line]);
 
             stage.addChild(line);
             stage.setChildIndex(line, 0);
-            add_glow(src_obj);
-            add_glow(dest_obj);
+            solum_add_glow(src_obj);
+            solum_add_glow(dest_obj);
         }
 
 
-        function num_connections(obj) {
+        function solum_num_connections(obj) {
             return obj.connection_list.length;
         }
 
 
-        function objects_are_connected(src_obj, dest_obj) {
+        function solum_objects_are_connected(src_obj, dest_obj) {
             var src_index, dest_index;
 
             src_index = null;
@@ -408,7 +457,7 @@
 
 
         // Logical removal, remove_line_between_objects() removes the actual line
-        function remove_connection(src_obj, dest_obj) {
+        function solum_remove_connection(src_obj, dest_obj) {
             for (var i = src_obj.orig_conn_list.length - 1; i >= 0; i--) {
                 if (src_obj.orig_conn_list[i][0] == dest_obj) {
                     src_obj.orig_conn_list.splice(i, 1);
@@ -424,14 +473,14 @@
         }
 
 
-        function remove_line_between_objects(src_obj, dest_obj, in_src_index, 
+        function solum_remove_line_between_objects(src_obj, dest_obj, in_src_index, 
             in_dest_index) {
             var src_index, dest_index;
 
             src_index = in_src_index;
             dest_index = in_dest_index;
             if (src_index == null || dest_index == null) {
-                ret_array = objects_are_connected(src_obj, dest_obj);
+                ret_array = solum_objects_are_connected(src_obj, dest_obj);
                 if (ret_array[0] != true) {
                     console.log("Objects " + src_obj.icon_name + "(" + 
                         src_obj.id + ") and " + dest_obj.icon_name + "(" + dest_obj.id +
@@ -453,39 +502,36 @@
             stage.removeChild(line);
 
             // If no connections, remove glow
-            if (num_connections(src_obj) <= 0) {
-                remove_glow(src_obj);
+            if (solum_num_connections(src_obj) <= 0) {
+                solum_remove_glow(src_obj);
             }
-            if (num_connections(dest_obj) <= 0) {
-                remove_glow(dest_obj);                          
+            if (solum_num_connections(dest_obj) <= 0) {
+                solum_remove_glow(dest_obj);                            
             }
         }
 
 
-        function redraw_all_lines(src_obj) {
+        function solum_redraw_all_lines(src_obj) {
             var dest_array = new Array();
 
             for (var src_index = src_obj.connection_list.length - 1; src_index >= 0; 
                 src_index--) {
                 dest_array.push(src_obj.connection_list[src_index][0]);
-                remove_line_between_objects(src_obj, src_obj.connection_list[src_index][0],
+                solum_remove_line_between_objects(src_obj, src_obj.connection_list[src_index][0],
                     null, null);
             }
             for (var i = 0; i < dest_array.length; i++) {
-                create_line(src_obj, dest_array[i], false);
+                solum_create_line(src_obj, dest_array[i], false);
             }
-            //console.log("Redrawing " + dest_array.length + " all lines to/from " +
-            //  src_obj.icon_name + "(" + src_obj.id + ")");
         }
 
 
-        function tick() {
+        function solum_tick() {
             if (physics_on > 0) {
-                //physics_on = false;
                 physics_on -= 1;
-                perform_force_movement(orig_move_obj);
-                for (var i = 0; i < num_connections(orig_move_obj); i++) {
-                    perform_force_movement(orig_move_obj.connection_list[i][0]);
+                solum_perform_force_movement(orig_move_obj);
+                for (var i = 0; i < solum_num_connections(orig_move_obj); i++) {
+                    solum_perform_force_movement(orig_move_obj.connection_list[i][0]);
                 }
 // TODO - make sure all objects can move
             }
@@ -494,10 +540,10 @@
         }
 
 
-        function get_point_by_distance(x1, y1, x2, y2, distance) {
+        function solum_get_point_by_distance(x1, y1, x2, y2, distance) {
             var x3 = x2 - x1;
             var y3 = y2 - y1;
-            d = calc_distance(x1, y1, x2, y2);
+            d = solum_calc_distance(x1, y1, x2, y2);
             ratio = distance / d;
             x3 *= ratio;
             y3 *= ratio;
@@ -505,16 +551,16 @@
         }
         
 
-        function perform_force_movement(obj) {
+        function solum_perform_force_movement(obj) {
             // Iterate all connected objects adding up forces
             var x_change = 0;
             var y_change = 0;
             var force_change = 0;
             var force;
-            for (var i = 0; i < num_connections(obj); i++) {
+            for (var i = 0; i < solum_num_connections(obj); i++) {
                 var dest_obj = obj.orig_conn_list[i][0];
                 var pref_dist = obj.orig_conn_list[i][1];
-                var dist = calc_distance(obj.x, obj.y, dest_obj.x, dest_obj.y);
+                var dist = solum_calc_distance(obj.x, obj.y, dest_obj.x, dest_obj.y);
 
                 delta_dist = dist - pref_dist;
                 force = delta_dist / 10;
@@ -529,14 +575,14 @@
             x_change = x_change / i;
             y_change = y_change / i;
             force_change = force_change / i;
-            point_array = get_point_by_distance(obj.x, obj.y, x_change, y_change, force_change);
+            point_array = solum_get_point_by_distance(obj.x, obj.y, x_change, y_change, force_change);
             obj.x = point_array[0];
             obj.y = point_array[1];
-            redraw_all_lines(obj);
+            solum_redraw_all_lines(obj);
         }
         
 
-        function calc_distance(x1, y1, x2, y2) {
+        function solum_calc_distance(x1, y1, x2, y2) {
             x_delta = Math.pow((x2 - x1), 2);
             y_delta = Math.pow((y2 - y1), 2);
             retval = Math.sqrt((x_delta + y_delta));
@@ -544,7 +590,7 @@
         }
 
 
-        function add_glow(cont) {
+        function solum_add_glow(cont) {
             if (cont.getNumChildren() > 1) {
                 //console.log("Trying to add more than 2 children to a dragger.");
                 return;
@@ -563,12 +609,10 @@
         }
 
 
-        function remove_glow(cont) {
+        function solum_remove_glow(cont) {
             if (cont.getNumChildren() < 2) {
                 console.log("Attempt to remove a non-existant glow shape.");
                 return;
             }
             cont.removeChildAt(0); // glow shape is always 0
         }
-
-
