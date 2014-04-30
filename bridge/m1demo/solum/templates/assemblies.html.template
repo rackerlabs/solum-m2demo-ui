@@ -34,9 +34,9 @@
     <script>
         function checkurl(str) {
             if ((str.toUpperCase() == "GITHUB.COM/DEMO")) {
-                window.location = '/ui/Solum/AppManage.html';
+                window.location = '/solum/app/45dac505-6d4b-4307-8d3e-6bac261b1ee3';
             } else {
-                window.location = '/ui/Solum/AppDefineCanvas.html';
+                window.location = '/solum/newapp';
             }
         }
 
@@ -46,7 +46,7 @@
             checkurl(textval)
         }
     </script>
-    <script src="js/solum-bridgecomm.js"></script>
+    <script src="/static/js/solum-bridgecomm.js"></script>
     <script type="text/javascript" src="/static/js/horizon/e1c20c29fbb2.js"></script>
     <script type="text/javascript" charset="utf-8">
         /*
@@ -224,8 +224,8 @@
     <div id="footer">
     </div>
 
-    <script type="text/javascript" src="./js/horizon/saved_resource"></script>
-    <script type="text/javascript" src="./js/horizon/0218443f736a.js"></script>
+    <script type="text/javascript" src="/static/js/horizon/saved_resource"></script>
+    <script type="text/javascript" src="/static/js/horizon/0218443f736a.js"></script>
 
     <script type="text/javascript" charset="utf-8">
         // Call init on DOM ready.
