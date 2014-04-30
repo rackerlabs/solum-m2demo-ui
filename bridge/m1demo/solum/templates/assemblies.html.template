@@ -51,7 +51,7 @@
                     <td><b>{{ forloop.counter }}</b></td>
                     <td>{{ a.name }}</td>
                     <td>{{ a.status }}</td>
-                    <td>{{ a.application_uri }}</td>
+                    <td><a href="{{ a.application_uri }}">{{ a.application_uri }}</a></td>
                     <td>
                         <a href="/solum/app/{{ a.uuid }}">
                             <button class="btn btn-mini btn-sm" style="color: #fff;width:30%">Update</button>
