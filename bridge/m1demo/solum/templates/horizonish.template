@@ -37,7 +37,7 @@
 <body ng-app="hz" class="ng-scope">
     <div id="container">
         <div class="topbar">
-            <h1 class="brand"><a href="http://localhost:8080/home/">OpenStack Dashboard</a></h1>
+            <h1 class="brand"><a>OpenStack Dashboard</a></h1>
             <div class="context-box">
                 <div id="tenant_switcher" class="dropdown switcher_bar" tabindex="1">
                     <h3>service</h3>
@@ -45,18 +45,18 @@
             </div>
             <div id="user_info" class="pull-right">
                 <div id="profile_editor_switcher" class="dropdown switcher_bar" tabindex="1">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="http://localhost:8080/admin/#profile_editor_switcher">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
                         <div>solum</div>
                     </a>
                     <ul id="editor_list" class="dropdown-menu">
                         <li class="divider"></li>
-                        <li><a href="http://localhost:8080/settings/">Settings</a>
+                        <li><a>Settings</a>
                         </li>
-                        <li><a href="http://docs.openstack.org/" target="_new">Help</a>
+                        <li><a>Help</a>
                         </li>
                     </ul>
                 </div>
-                <a href="http://localhost:8080/auth/logout/">Sign Out</a>
+                <a>Sign Out</a>
             </div>
         </div>
         <div id="main_content">
@@ -72,22 +72,22 @@
                             <div>
                                 <h4 class=""><div>Compute</div></h4>
                                 <ul style="display: none;">
-                                    <li><a href="http://localhost:8080/project/" tabindex="1">Overview</a>
+                                    <li><a>Overview</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/project/instances/" tabindex="2">Instances</a>
+                                    <li><a>Instances</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/project/volumes/" tabindex="3">Volumes</a>
+                                    <li><a>Volumes</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/project/images/" tabindex="4">Images</a>
+                                    <li><a>Images</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/project/access_and_security/" tabindex="5">Access &amp; Security</a>
+                                    <li><a>Access &amp; Security</a>
                                     </li>
                                 </ul>
                             </div>
                             <div>
                                 <h4><div>Orchestration</div></h4>
                                 <ul style="display: none;">
-                                    <li><a href="http://localhost:8080/project/stacks/" tabindex="1">Stacks</a>
+                                    <li><a>Stacks</a>
                                     </li>
                                 </ul>
                             </div>
@@ -108,28 +108,28 @@
                                 <ul>
                                     <li><a href="./Horizon_dashboard_files/Horizon_dashboard.html" class="active" tabindex="1">Overview</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/hypervisors/" tabindex="2">Hypervisors</a>
+                                    <li><a>Hypervisors</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/aggregates/" tabindex="3">Host Aggregates</a>
+                                    <li><a>Host Aggregates</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/instances/" tabindex="4">Instances</a>
+                                    <li><a>Instances</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/volumes/" tabindex="5">Volumes</a>
+                                    <li><a>Volumes</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/flavors/" tabindex="6">Flavors</a>
+                                    <li><a>Flavors</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/images/images/" tabindex="7">Images</a>
+                                    <li><a>Images</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/info/" tabindex="8">System Info</a>
+                                    <li><a>System Info</a>
                                     </li>
                                 </ul>
                             </div>
                             <div>
                                 <h4><div>Identity Panel</div></h4>
                                 <ul style="display: none;">
-                                    <li><a href="http://localhost:8080/admin/projects/" tabindex="1">Projects</a>
+                                    <li><a>Projects</a>
                                     </li>
-                                    <li><a href="http://localhost:8080/admin/users/" tabindex="2">Users</a>
+                                    <li><a>Users</a>
                                     </li>
                                 </ul>
                             </div>
