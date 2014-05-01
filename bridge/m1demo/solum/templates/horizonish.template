@@ -114,7 +114,7 @@
                             <div>
                                 <h4><div>Solum</div></h4>
                                 <ul style="display: none;">
-                                    <li><a href="/solum" tabindex="1">Applications</a>
+                                    <li><a href="/solum" class="active" tabindex="1">Applications</a>
                                     </li>
                                 </ul>
                             </div>
@@ -126,7 +126,7 @@
                             <div>
                                 <h4 class=""><div>System Panel</div></h4>
                                 <ul>
-                                    <li><a href="./Horizon_dashboard_files/Horizon_dashboard.html" class="active" tabindex="1">Overview</a>
+                                    <li><a>Overview</a>
                                     </li>
                                     <li><a>Hypervisors</a>
                                     </li>

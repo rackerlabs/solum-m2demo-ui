@@ -77,12 +77,12 @@
                     </div>
                     <div class="col-md-2 column">
                             <button id="dep_button" 
-                                    class="btn btn-primary" 
+                                    class="btn btn-success" 
                                     style="width:110px">Deploy</button>
                     </div>
                     <div class="col-md-2 column">
                         <button id="stop_button" 
-                                class="btn btn-danger" 
+                                class="btn btn-warning" 
                                 style="width:110px">Stop</button>
                     </div>
                     <div class="col-md-2 column">
