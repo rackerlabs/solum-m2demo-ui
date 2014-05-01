@@ -46,7 +46,7 @@ function solum_draw_status(context, states){
     context.fillText(state.name, xoffset, 95);
 
     var icon = icons[i];
-    icon.src = '../images/' + state.img + '.png';
+    icon.src = '/static/images/' + state.img + '.png';
     icon.xoff = 10 + (100 * i);
     icon.onload = function(k) {
         return function(){
@@ -77,24 +77,24 @@ function solum_draw_status(context, states){
 function build_status(string){
     var S = [
         {
-            'name': 'git',
+            'name': 'Git',
             'img': 'download-icon',
         },
         {
-            'name': 'build',
+            'name': 'Build',
             'img': 'wrench',
         },
         {
-            'name': 'test',
+            'name': 'Test',
             'img': 'lab-beaker-icon',
             'status': 'DISABLED',
         },
         {
-            'name': 'image',
+            'name': 'Image',
             'img': 'paper-icon',
         },
         {
-            'name': 'template',
+            'name': 'Template',
             'img': 'setting-icon',
         },
     ];
@@ -137,15 +137,15 @@ function build_status(string){
 function deploy_status(string){
     var S = [
         {
-            'name': 'start',
+            'name': 'Start',
             'img': 'download-icon',
         },
         {
-            'name': 'heat',
+            'name': 'Heat',
             'img': 'fire-icon',
         },
         {
-            'name': 'complete',
+            'name': 'Complete',
             'img': 'browser-icon',
         },
     ];
