@@ -41,7 +41,7 @@
         line_width = 3;
 
         // *** Load Balancer ***
-        lb_icon = "images/load_balancer.png";
+        lb_icon = "/static/images/load_balancer.png";
         lb_name = "lb";
         lb_x_scale = 0.8;
         lb_y_scale = 0.8;
@@ -51,7 +51,7 @@
 
         // *** Language Packs ***
         // Python
-        python_icon = "images/python.png";
+        python_icon = "/static/images/python.png";
         python_name = "Python";
         python_x_scale = 0.25;
         python_y_scale = 0.25;
@@ -59,7 +59,7 @@
         python_y = 35;
         python_conn_type = 1;
         // Java
-        java_icon = "images/java.png";
+        java_icon = "/static/images/java.png";
         java_name = "Java";
         java_x_scale = 0.25;
         java_y_scale = 0.25;
@@ -67,7 +67,7 @@
         java_y = 35;
         java_conn_type = 1;
         // Ruby
-        ruby_icon = "images/ruby.png";
+        ruby_icon = "/static/images/ruby.png";
         ruby_name = "Ruby";
         ruby_x_scale = 0.75;
         ruby_y_scale = 0.75;
@@ -75,7 +75,7 @@
         ruby_y = 35;
         ruby_conn_type = 1;
         // Node.js
-        nodejs_icon = "images/nodejs.png";
+        nodejs_icon = "/static/images/nodejs.png";
         nodejs_name = "Node.js";
         nodejs_x_scale = 0.85;
         nodejs_y_scale = 0.85;
@@ -85,7 +85,7 @@
 
         // *** Services ***
         // Trove
-        trove_icon = "images/database.png";
+        trove_icon = "/static/images/database.png";
         trove_name = "Trove";
         trove_x_scale = 0.2; // Scale trove icon to this % in the x direction
         trove_y_scale = 0.2; // Scale trove icon to this % in the y direction
@@ -93,7 +93,7 @@
         trove_y = 300; // Trove icon y starting location
         trove_conn_type = 2;
         // Memcache
-        memcache_icon = "images/memcache.png";
+        memcache_icon = "/static/images/memcache.png";
         memcache_name = "Memcached";
         memcache_x_scale = 0.75; // Scale trove icon to this % in the x direction
         memcache_y_scale = 0.75; // Scale trove icon to this % in the y direction
@@ -101,7 +101,7 @@
         memcache_y = 400; // Trove icon y starting location
         memcache_conn_type = 2;
         // Newrelic
-        newrelic_icon = "images/newRelic.png";
+        newrelic_icon = "/static/images/newRelic.png";
         newrelic_name = "NewRelic";
         newrelic_x_scale = 0.12; // Scale trove icon to this % in the x direction
         newrelic_y_scale = 0.12; // Scale trove icon to this % in the y direction

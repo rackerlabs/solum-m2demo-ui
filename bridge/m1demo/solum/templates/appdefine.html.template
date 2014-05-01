@@ -2,7 +2,7 @@
 {% block title %}Solum - Define Application{% endblock %}
 {% block extraheaddata %}
 <script src="/static/js/createjs-2013.12.12.min.js"></script>
-<script type="text/javascript" src="/static/js/solum_demo.js"></script>
+<script type="text/javascript" src="/static/js/solum-appdefine.js"></script>
 <style 
 {% endblock %}
 {% block solumbody %}
@@ -19,7 +19,7 @@
 {% endblock %}
 {% block extrafooter %}
  <script>
-    preinit();
+    solum_preinit();
  </script>
 {% endblock %}
 
