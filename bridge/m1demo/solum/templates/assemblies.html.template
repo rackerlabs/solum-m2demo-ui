@@ -40,8 +40,10 @@
                 <td><a href="{{ a.application_uri }}">{{ a.application_uri }}</a>
                 </td>
                 <td>
-                    <a href="/solum/app/{{ a.uuid }}">
+                    <a href="/solum/newapp">
                         <button class="btn btn-info btn-sm" style="width:30%">Update</button>
+                    </a>
+                    <a href="/solum/app/{{ a.uuid }}">
                         <button class="btn btn-info btn-sm" style="width:30%">Manage</button>
                     </a>
                 </td>
