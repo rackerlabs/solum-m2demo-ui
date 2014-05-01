@@ -17,27 +17,6 @@
         }
     </script>
     <script src="/static/js/solum-bridgecomm.js"></script>
-    <script type="text/javascript" src="/static/js/horizon/e1c20c29fbb2.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        /*
-        Added so that we can append Horizon scoped JS events to
-        the DOM load events without running in to the "horizon"
-        name-space not currently being defined since we load the
-        scripts at the bottom of the page.
-        */
-        var addHorizonLoadEvent = function (func) {
-            var old_onload = window.onload;
-
-            if (typeof window.onload != 'function') {
-                window.onload = func;
-            } else {
-                window.onload = function () {
-                    old_onload();
-                    func();
-                }
-            }
-        }
-    </script>
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
@@ -62,8 +41,8 @@
                 </td>
                 <td>
                     <a href="/solum/app/{{ a.uuid }}">
-                        <button class="btn btn-mini btn-sm" style="color: #fff;width:30%">Update</button>
-                        <button class="btn btn-danger btn-sm" style="width:30%">Manage</button>
+                        <button class="btn btn-info btn-sm" style="width:30%">Update</button>
+                        <button class="btn btn-info btn-sm" style="width:30%">Manage</button>
                     </a>
                 </td>
             </tr>
@@ -77,7 +56,7 @@
                 <td></td>
                 <td>
                     <button class="btn btn-default btn-sm invisible" style="width:30%">Update</button>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New App</button>
+                    <button class="btn btn-success" style="width:30%" data-toggle="modal" data-target="#myModal">New App</button>
                 </td>
             </tr>
 
