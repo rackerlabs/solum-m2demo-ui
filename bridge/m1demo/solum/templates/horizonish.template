@@ -30,6 +30,26 @@
     <link rel="stylesheet" href="/static/js/horizon/e2176743197d.css" type="text/css" media="screen">
     <script src="/static/js/jquery-1.11.0.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/static/js/horizon/e1c20c29fbb2.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        /*
+        Added so that we can append Horizon scoped JS events to
+        the DOM load events without running in to the "horizon"
+        name-space not currently being defined since we load the
+        scripts at the bottom of the page.
+        */
+        var addHorizonLoadEvent = function (func) {
+            var old_onload = window.onload;
+
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    old_onload();
+                    func();
+                }
+            }
+        }
+    </script>
     {% block extraheaddata %}{% endblock %}
     <style></style>
 </head>
