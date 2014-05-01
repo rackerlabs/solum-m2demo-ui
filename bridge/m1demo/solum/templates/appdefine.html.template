@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Solum M2 App Definition Prototype</title>
-        <script src="/static/js/createjs-2013.12.12.min.js"></script>
-        <script type="text/javascript" src="/static/js/solum_demo.js"></script>
-    </head>
-    <body onload="preinit()">
-        <div id="main">
-            <H1>Solum M2 App Definition Prototype ({{ git_url }})</H1>
-            <canvas id="canvas" width="800" height="600" style="background-color:#FFFFFF">
-                <p>Your browser does not support HTML5 Canvas which is required to see this content.</p>
-            </canvas>
-        </div>
-        Instructions: Drag and drop the icons in the canvas area.  Then right click two separate
-        icons to draw a line between them or to remove the connection.<br>
-        Rules: Load Balancers connect to Language Packs which connect to Services.<br><br>
-        <button id="plan_button" type="button"><b>Generate Plan</b></button>
-    <br><br>
-    </body>
-</html>
+{% extends "horizonish.template" %}
+{% block title %}Solum - Define Application{% endblock %}
+{% block extraheaddata %}
+<script src="/static/js/createjs-2013.12.12.min.js"></script>
+<script type="text/javascript" src="/static/js/solum_demo.js"></script>
+<style 
+{% endblock %}
+{% block solumbody %}
+<div id="content_body">
+    <canvas id="canvas" width="800" height="600" style="background-color:#FFFFFF">
+        <p>Your browser does not support HTML5 Canvas which is required to see this content.</p>
+    </canvas>
+    <br>
+    Instructions: Drag and drop the icons in the canvas area.  Then right click two separate
+    icons to draw a line between them or to remove the connection.<br>
+    Rules: Load Balancers connect to Language Packs which connect to Services.<br><br>
+    <button id="plan_button" type="button"><b>Generate Plan</b></button>
+</div>
+{% endblock %}
+{% block extrafooter %}
+ <script>
+    preinit();
+ </script>
+{% endblock %}
 
