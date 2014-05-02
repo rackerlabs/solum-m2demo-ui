@@ -211,17 +211,15 @@
             solum_create_text("Network:", "bold 16px Arial", 2, 220);
 
             // Made the Create Plan button
-            html_button = document.getElementById("plan_button");
-            plan_dom = new createjs.DOMElement(html_button);
-            plan_dom.x = 100;
-            plan_dom.y = 100;
-            plan_dom.htmlElement.onclick = function() {
-// TODO - connect this to the demo later
-                var plan_text = solum_create_plan();
-                if (plan_text.length < 5)
-                    plan_text = "[Empty plan file: No components are connected.]";
-                alert(plan_text);
-            }
+//          html_button = document.getElementById("plan_button");
+//          plan_dom = new createjs.DOMElement(html_button);
+//          plan_dom.htmlElement.onclick = function() {
+// TODO - connect this to the demo later --- this is no longer needed!  Delete later once tested
+//              var plan_text = solum_create_plan();
+//              if (plan_text.length < 5)
+//                  plan_text = "[Empty plan file: No components are connected.]";
+//              alert(plan_text);
+//          }
 
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);
@@ -237,7 +235,15 @@
                 "        href: https://github.com/paulczar/solum-example-app-ghost.git\n" +
                 "    language_pack: auto\n"
 
-// TODO: add SQL initialization script
+// TODO: add SQL initialization script; example:
+//   artifact_type: org.sql:SqlScript
+//    content:
+//        href: https://github.com/stackforge/solum.git
+//        script:solum/objects/sqlalchemy/migration/alembic_migrations/versions/498adc6185ae_create_initial_db_schema.py
+//    requirements:
+//        requirement_type: org.solum.sql:RunOn
+//        fulfillment: id:db_1
+
             var plan_header = "camp_version: CAMP 1.1\n";
             var artifacts_header = "artifacts:\n";
             // Fill in ARTIFACT_URL with git repo url, NUM_INSTANCES with the number of
