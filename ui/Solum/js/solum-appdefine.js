@@ -40,6 +40,7 @@
         // Icon scaling/positioning
         line_width = 3;
 
+
         // *** Load Balancer ***
         lb_icon = "images/load_balancer.png";
         lb_name = "lb";
@@ -48,6 +49,8 @@
         lb_x = 35;
         lb_y = 300;
         lb_conn_type = 0;
+        lb_camp_connect_type = "org.solum.reverseproxy:ConnectFrom";
+        lb_camp_char_type = "        characteristic_type: org.reverseproxy:Nginx\n";
 
         // *** Language Packs ***
         // Python
@@ -92,6 +95,10 @@
         trove_x = 760; // Trove icon x starting location
         trove_y = 300; // Trove icon y starting location
         trove_conn_type = 2;
+        trove_camp_connect_type = "org.solum.sql:ConnectTo";
+        trove_camp_char_type = "        characteristic_type: org.storage.db:RDBM\n" +
+            "        characteristic_type: org.storage.db:Replication\n" +
+            "        characteristic_type: org.iso.sql:SQL\n";
         // Memcache
         memcache_icon = "images/memcache.png";
         memcache_name = "Memcached";
@@ -100,6 +107,8 @@
         memcache_x = 760; // Trove icon x starting location
         memcache_y = 400; // Trove icon y starting location
         memcache_conn_type = 2;
+        memcache_camp_connect_type = "org.solum.cache:ConnectTo";
+        memcache_camp_char_type = "        characteristic_type: org.solum.cache:Memcached\n";
         // Newrelic
         newrelic_icon = "images/newRelic.png";
         newrelic_name = "NewRelic";
@@ -108,6 +117,8 @@
         newrelic_x = 760; // Trove icon x starting location
         newrelic_y = 200; // Trove icon y starting location
         newrelic_conn_type = 2;
+        newrelic_camp_connect_type = "org.solum.monitor:ConnectTo";
+        newrelic_camp_char_type = "        characteristic_type: org.solum.monitor:NewRelic\n";
 
 
 
@@ -138,18 +149,24 @@
 
         function solum_init() {
             // Create the icon/draggers - Load Balancer first
-            solum_create_icon(lb_name, lb_x, lb_y, lb_x_scale, lb_y_scale, lb_conn_type);
+            solum_create_icon(lb_name, lb_x, lb_y, lb_x_scale, lb_y_scale, lb_conn_type,
+                lb_camp_connect_type, lb_camp_char_type);
             // Language Packs
-            solum_create_icon(python_name, python_x, python_y, python_x_scale, python_y_scale, python_conn_type);
-            solum_create_icon(java_name, java_x, java_y, java_x_scale, java_y_scale, java_conn_type);
-            solum_create_icon(ruby_name, ruby_x, ruby_y, ruby_x_scale, ruby_y_scale, ruby_conn_type);
-            solum_create_icon(nodejs_name, nodejs_x, nodejs_y, nodejs_x_scale, nodejs_y_scale, nodejs_conn_type);
+            solum_create_icon(python_name, python_x, python_y, python_x_scale, python_y_scale, python_conn_type,
+                "N/A", "N/A");
+            solum_create_icon(java_name, java_x, java_y, java_x_scale, java_y_scale, java_conn_type,
+                "N/A", "N/A");
+            solum_create_icon(ruby_name, ruby_x, ruby_y, ruby_x_scale, ruby_y_scale, ruby_conn_type,
+                "N/A", "N/A");
+            solum_create_icon(nodejs_name, nodejs_x, nodejs_y, nodejs_x_scale, nodejs_y_scale, nodejs_conn_type,
+                "N/A", "N/A");
             // Services
-            solum_create_icon(trove_name, trove_x, trove_y, trove_x_scale, trove_y_scale, trove_conn_type);
+            solum_create_icon(trove_name, trove_x, trove_y, trove_x_scale, trove_y_scale, trove_conn_type,
+                trove_camp_connect_type, trove_camp_char_type);
             solum_create_icon(memcache_name, memcache_x, memcache_y, memcache_x_scale,
-                memcache_y_scale, memcache_conn_type);
+                memcache_y_scale, memcache_conn_type, memcache_camp_connect_type, memcache_camp_char_type);
             solum_create_icon(newrelic_name, newrelic_x, newrelic_y, newrelic_x_scale,
-                newrelic_y_scale, newrelic_conn_type);
+                newrelic_y_scale, newrelic_conn_type, newrelic_camp_connect_type, newrelic_camp_char_type);
 
             var rect = new createjs.Shape();
             rect.graphics.beginFill("#F7DFF9").drawRect(0, 0, 70, 600);
@@ -214,38 +231,76 @@
 
 
         function solum_create_plan() {
-// TODO remove hard coded crud
-            var plan_text = "name: ex1\n";
-            plan_text += "description: Nodejs express.\n";
-            plan_text += "artifacts:\n";
-            plan_text += "- name: nodeus\n";
-            plan_text += "  artifact_type: application.heroku\n";
-            plan_text += "   content:\n"
-            plan_text += "     href: https://github.com/paulczar/example-nodejs-express.git\n";
-            plan_text += "    language_pack: auto\n";
-            
-            plan_text += "\n\n----- Demo Connectivity Data -----\n{\n";
+// TODO: add SQL initialization script
+            var plan_header = "camp_version: CAMP 1.1\n";
+            var artifacts_header = "artifacts:\n";
+            // Fill in ARTIFACT_URL with git repo url, NUM_INSTANCES with the number of
+            // apps to run.
+            var artifact_template = "    artifact_type: application.heroku\n" +
+                "    content:\n        href: ARTIFACT_URL\n    instances: NUM_INSTANCES\n" +
+                "    requirements:\n        requirement_type: org.solum:BuildUsing\n" +
+                "        fulfillment: id:langpack-auto\n\n";
+            // Fill in CONNECT_TYPE with "To" or "From", FULFILL_ID with the real id like "db_1"
+            // Also need to figure out the ??? sections
+            var artifact_connect_template = "        requirement_type: CONNECT_TYPE\n" +
+                "        fulfillment: id:FULFILL_ID\n\n";
+            var services_header = "services:";
+            // Fill in SERVICE_ID
+            var service_template = "\n    id: SERVICE_ID\n    characteristics:\n";
+            // Fill in CHAR_TYPE
+            var service_characteristic_template = "        characteristic_type: CHAR_TYPE\n";
+
+            // Hard coded example/test following...
+            var temp_str = "";
+            var out_str = plan_header + artifacts_header;
+
+            // DRY this up later
+            // Iterate artifacts aka language packs aka applications first
             for (var i = 0; i < stage.getNumChildren(); i++) {
                 obj = stage.getChildAt(i);
                 if (obj.hasOwnProperty("connection_list")) {
                     if (obj.connection_list.length > 0) {
-                        plan_text += "\t\"" + obj.icon_name + "_" + obj.id + "\": [";
-                        prev_entry = false;
-                        for (var j = 0; j < obj.connection_list.length; j++) {
-                            if (prev_entry == false) {
-                                prev_entry = true;
-                            } else {
-                                plan_text += ", ";
+                        if (obj.conn_type == 1) { // Artifact/Language Pack/Application/etc
+                            temp_str = artifact_template;
+// TODO: need git url
+                            temp_str = temp_str.replace("ARTIFACT_URL", "???artifact_url???");
+                            temp_str = temp_str.replace("NUM_INSTANCES", "1");
+                            out_str += temp_str;
+
+                            for (var j = 0; j < obj.connection_list.length; j++) {
+                                temp_str = artifact_connect_template;
+                                temp_str = temp_str.replace("CONNECT_TYPE", obj.connection_list[j][0].camp_connect_type);
+                                temp_str = temp_str.replace("FULFILL_ID", obj.connection_list[j][0].icon_name + "_" +
+                                    obj.connection_list[j][0].id);
+                                out_str += temp_str;
                             }
-                            plan_text += "\"" + obj.connection_list[j][0].icon_name +
-                                "_" + obj.connection_list[j][0].id + "\"";
                         }
-                        plan_text += "],\n";
+
                     }
                 }
             }
-            plan_text += "}";
-            return plan_text;
+
+
+//start here
+            // Now iterate network and services
+            out_str += services_header;
+            for (var i = 0; i < stage.getNumChildren(); i++) {
+                obj = stage.getChildAt(i);
+                if (obj.hasOwnProperty("connection_list")) {
+                    if (obj.connection_list.length > 0) {
+                        if (obj.conn_type != 1) {
+                            temp_str = service_template;
+                            temp_str = temp_str.replace("SERVICE_ID", 
+                                obj.icon_name + "_" + obj.id);
+                            out_str += temp_str;
+                            out_str += obj.camp_char_type;
+                        }
+
+                    }
+                }
+            }
+
+            return out_str;
         }
 
 
@@ -268,7 +323,8 @@
         }
 
 
-        function solum_create_icon(icon_name, x_pos, y_pos, x_scale, y_scale, conn_type) {
+        function solum_create_icon(icon_name, x_pos, y_pos, x_scale, y_scale, conn_type,
+            camp_connect_type, camp_char_type) {
             var bmp = new createjs.Bitmap(queue.getResult(icon_name));
             bmp.scaleX = x_scale;
             bmp.scaleY = y_scale;
@@ -288,6 +344,8 @@
             dragger.has_moved = false;
             dragger.connection_list = new Array();
             dragger.orig_conn_list = new Array();
+            dragger.camp_connect_type = camp_connect_type;
+            dragger.camp_char_type = camp_char_type;
 
             dragger.addChild(bmp);
             console.log("New container " + icon_name + "(" + dragger.id + ")");
@@ -360,7 +418,9 @@
                             obj = evnt.currentTarget;
                             obj.has_moved = true;
                             solum_create_icon(obj.icon_name, obj.orig_x, obj.orig_y,
-                                obj.x_scale, obj.y_scale, obj.conn_type);
+                                obj.x_scale, obj.y_scale, obj.conn_type, 
+                                evnt.currentTarget.camp_connect_type, 
+                                evnt.currentTarget.camp_char_type);
                         } else {
                             if (solum_num_connections(evnt.currentTarget) > 0) {
                                 orig_move_obj = evnt.currentTarget;
