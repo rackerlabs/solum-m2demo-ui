@@ -194,9 +194,10 @@
             solum_create_text("Network:", "bold 16px Arial", 2, 220);
 
             // Made the Create Plan button
+            /*
             html_button = document.getElementById("plan_button");
             plan_dom = new createjs.DOMElement(html_button);
-            plan_dom.x = 100;
+            //plan_dom.x = 100;
             plan_dom.y = 100;
             plan_dom.htmlElement.onclick = function() {
 // TODO - connect this to the demo later
@@ -205,6 +206,7 @@
                     plan_text = "[Empty plan file: No components are connected.]";
                 alert(plan_text);
             }
+            */
 
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);

@@ -70,10 +70,11 @@ def new_app_json(req):
         tmp.write(plantext)
         tmp.close()
         new_app = '~/new-app.sh %s' % tmp.name
+        print "Attempting bash -c %s" % new_app
         out, err = subprocess.Popen(['bash', '-c', new_app],
                                     stdout=subprocess.PIPE).communicate()
         uuid = out.strip()
-        return app(req, uuid)
+        return app_json(req, uuid)
 
 def assemblies_json(req):
     assemblies = solum_models.Assembly.objects.all()
@@ -97,4 +98,4 @@ def new_assembly_json(req):
     out, err = subprocess.Popen(['bash', '-c', new_assembly],
                                 stdout=subprocess.PIPE).communicate()
     uuid = out.strip()
-    return assembly(req, uuid)
+    return assembly_json(req, uuid)

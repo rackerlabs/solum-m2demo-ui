@@ -3,18 +3,51 @@
 {% block extraheaddata %}
 <script src="/static/js/createjs-2013.12.12.min.js"></script>
 <script type="text/javascript" src="/static/js/solum-appdefine.js"></script>
-<style 
+<script type="text/javascript" src="/static/js/solum-bridgecomm.js"></script>
+<script type="text/javascript">
+function solum_deployapp(){
+    var plantext = $("textarea#planfile").val();
+    var result = createApp(plantext);
+    var now = new Date();
+    var name = result.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes();
+    createAssembly(result.uri, name);
+}
+</script>
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
+    <div style="float:left" >
     <canvas id="canvas" width="800" height="600" style="background-color:#FFFFFF">
         <p>Your browser does not support HTML5 Canvas which is required to see this content.</p>
     </canvas>
-    <br>
+    </div>
+
+    <div style="float:right" >
+    <form>
+        <textarea id="planfile" cols="60" rows="25" wrap="off">
+name: ghost
+description: ghost blogging platform
+artifacts:
+- name: ghost
+  artifact_type: application.heroku
+  content:
+    href: https://github.com/paulczar/solum-example-app-ghost.git
+  language_pack: auto
+        </textarea>
+
+        <br>
+        <button><b>Generate Plan</b></button>
+        <button onClick="solum_deployapp()"><b>Deploy App</b></button>
+    </form>
+    </div>
+
+    <hr>
+
+    <div style="float:left">
     Instructions: Drag and drop the icons in the canvas area.  Then right click two separate
     icons to draw a line between them or to remove the connection.<br>
     Rules: Load Balancers connect to Language Packs which connect to Services.<br><br>
-    <button id="plan_button" type="button"><b>Generate Plan</b></button>
+    </div>
 </div>
 {% endblock %}
 {% block extrafooter %}
@@ -22,4 +55,3 @@
     solum_preinit();
  </script>
 {% endblock %}
-
