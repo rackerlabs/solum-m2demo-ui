@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Git planfile fetch</title>
+    <script type="text/javascript" src="./jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="./solum-getplanfile.js"></script>
+    <script type="text/javascript">
+      function popGetPlanfile() {
+        $("textarea#planfile").val(getPlanFile($("#git_url").val()));
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      <input id="git_url" type="text" size="60" placeholder="Git repo URL">
+      <input type="button" value="Fetch" onClick="popGetPlanfile()">
+      <br>
+      <textarea id="planfile" rows="15" cols="65"></textarea>
+    </form>
+  </body>
+</html>
