@@ -10,91 +10,12 @@
             <canvas id="buildstatus" height="100" width="500"></canvas>
         </center>
     </div>
-    <table class="table" style="width:100% height:100%">
-        <td border="0" align="center" valign="top">
-            <table class="table table-hover table-condensed" width=60%>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Version</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td>MyJavaApp</td>
-                        <td>1.0</td>
-                        <td>4/21/2014</td>
-                        <td>
-                            <button class="btn btn-mini btn-sm">Select</button>     
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <td>MyJavaApp</td>
-                        <td>2.7</td>
-                        <td>4/21/2014</td>
-                        <td>
-                            <button class="btn btn-mini btn-sm">Select</button>  
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td>MyJavaApp</td>
-                        <td>2.0</td>
-                        <td>4/21/2014</td>
-                        <td>
-                            <button class="btn btn-mini btn-sm">Select</button>   
-                        </td>
-                    </tr>
-                </tbody>                           
-            </table>
-            <div class="row row-centered" id="deploy_workflow">
-                <div class="span12" id="deploy_workflow">
-                    <center>
-                        <canvas id="deploystatus" height="100" width="300"></canvas>
-                    </center>
-                </div>
-            </div>
-                <div class="container" id="deploy_control">
-                    <div class="btn-group pull-left">
-                        <button id="env_button" 
-                                class="btn btn-default" 
-                                style="width:110px">Environments
-                        </button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Dev</a></li>
-                            <li><a href="#">Test</a></li>
-                            <li><a href="#">Staging</a></li>
-                            <li><a href="#">Production</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 column">
-                            <button id="dep_button" 
-                                    class="btn btn-success" 
-                                    style="width:110px">Deploy</button>
-                    </div>
-                    <div class="col-md-2 column">
-                        <button id="stop_button" 
-                                class="btn btn-warning" 
-                                style="width:110px">Stop</button>
-                    </div>
-                    <div class="col-md-2 column">
-                        <button id="destroy_button" 
-                                class="btn btn-danger" 
-                                style="width:110px">Destroy</button>
-                    </div>
-                </div>
-                <br><br><br><br>
-                
-            </table>
-    </table>
+    <br><br><br><br><br><br><br><br>
+    <center>
+    <button id="dep_button" 
+            class="btn btn-info" 
+            style="width:90px">Done</button>
+            </center>
 </div>
 {% endblock %}
 {% block extrafooter %}

@@ -17,4 +17,6 @@ urlpatterns = patterns('',
     url('^$', views.assemblies, name='assemblies'),
     url('^newapp$', views.newapp, name='newapp'),
     url('^app/(?P<app_id>%s)$' % uuid_regex, views.app, name='viewapp'),
+    
+    url('^appmanage$', views.appmanage, name='appmanage'),
 )

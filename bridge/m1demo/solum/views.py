@@ -31,6 +31,16 @@ def app(req, app_id):
     response["Access-Control-Allow-Origin"] = "*"
     return response
 
+def appmanage(req):
+    # Display App Definition page.
+    git_url = ''
+    if req.method == 'GET':
+        git_url = req.GET.get('git', '')
+    context = {'git_url': git_url}
+    response = render(req, 'appmanage.html.template', context)
+    response["Access-Control-Allow-Origin"] = "*"
+    return response
+
 ###
 
 def apps_json(req):
