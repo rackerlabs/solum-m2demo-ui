@@ -231,6 +231,12 @@
 
 
         function solum_create_plan() {
+// TODO: See if we can make this real later; solum doesn't understand the complete plan below yet
+            return "name: ghost\ndescription: ghost blogging platform\nartifacts:\n" +
+                "    name: ghost\n    artifact_type: application.heroku\n    content:\n" +
+                "        href: https://github.com/paulczar/solum-example-app-ghost.git\n" +
+                "    language_pack: auto\n"
+
 // TODO: add SQL initialization script
             var plan_header = "camp_version: CAMP 1.1\n";
             var artifacts_header = "artifacts:\n";
