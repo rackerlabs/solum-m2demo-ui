@@ -16,7 +16,7 @@ def newapp(req):
     # Display App Definition page.
     git_url = ''
     if req.method == 'GET':
-        git_url = req.GET.get('git', '')
+        git_url = req.GET.get('githuburl', '')
     context = {'git_url': git_url}
     response = render(req, 'appdefine.html.template', context)
     response["Access-Control-Allow-Origin"] = "*"
