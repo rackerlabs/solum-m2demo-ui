@@ -13,7 +13,6 @@
 // * delete icon or reset button?
 // * visible rejection of bad connections
 // * physics -  don't allow objects to move out of canvas or get too close to other objs
-// * Replace Create.js CDN link with local copy
 
 
         // General global variables
@@ -188,10 +187,10 @@
 
 
             // Set up labels and some lines
-            solum_draw_line(0, 0, 800, 0, "#999999", 3);
-            solum_draw_line(0, 0, 0, 800, "#999999", 3);
-            solum_draw_line(0, 600, 800, 600, "#999999", 3);
-            solum_draw_line(800, 0, 800, 600, "#999999", 3);
+            solum_draw_line(0, 0, 800, 0, "#999999", 2);
+            solum_draw_line(0, 0, 0, 800, "#999999", 2);
+            solum_draw_line(0, 600, 800, 600, "#999999", 2);
+            solum_draw_line(800, 0, 800, 600, "#999999", 2);
 
             solum_draw_line(80, 85, 720, 85, "#999999", 1);
             solum_draw_line(80, 85, 80, 600, "#999999", 1);
@@ -330,6 +329,12 @@
             bmp.scaleY = y_scale;
             bmp.regX = bmp.image.width * 0.5;
             bmp.regY = bmp.image.height * 0.5;
+
+
+//var hit = new createjs.Shape();
+//hit.graphics.beginFill("#000").drawRect(0, 0, 500, 500);
+//bmp.hitArea = hit;
+
 
             var dragger = new createjs.Container();
             dragger.x = x_pos;
