@@ -1,19 +1,17 @@
 {% extends "horizonish.template" %}
 {% block title %}Usage Overview - OpenStack Dashboard{% endblock %}
 {% block extraheaddata %}
-    <script>
-        function checkurl(str) {
-            if ((str.toUpperCase() == "GITHUB.COM/DEMO")) {
-                window.location = '/solum/app/45dac505-6d4b-4307-8d3e-6bac261b1ee3';
-            } else {
+    <script type="text/javascript" src="/static/js/solum-getplanfile.js"></script>
+    <script type="text/javascript">
+        function popGetPlanfile() {
+            $("textarea#planfile").val(getPlanFile($("#githuburl").val()));
+            
+            str = getPlanFile($("#githuburl").val());
+            if ((str.toUpperCase() == "")) {
                 window.location = '/solum/newapp';
+            } else {
+                window.location = '/solum/app/3cd8c40e-8f2d-44d4-b109-659c1511e556';
             }
-        }
-
-        function getvalue() {
-            var textval = $('#githuburl').val()
-            console.log(textval)
-            checkurl(textval)
         }
     </script>
     <script src="/static/js/solum-bridgecomm.js"></script>
@@ -70,7 +68,7 @@
 {% endblock %}
 {% block extrafooter %}
     <!-- Modal window for github url entry -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -82,26 +80,7 @@
                     <input type="text" style="width:98%" class="form-control" id="githuburl" placeholder="Enter GitHub URL">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="getvalue()">Next</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal window for assembly status -->
-    <div class="modal fade" id="assemblyStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Create a new App</h4>
-                </div>
-                <div class="modal-body" style="white-space:nowrap">
-                    <label for="githuburl">GitHub URL</label>
-                    <input type="text" style="width:98%" class="form-control" id="githuburl" placeholder="Enter GitHub URL">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="getvalue()">Next</button>
+                    <button type="button" class="btn btn-primary" onclick="popGetPlanfile()">Next</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
