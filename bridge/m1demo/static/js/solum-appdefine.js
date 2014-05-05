@@ -20,6 +20,8 @@
         var canvas, stage, queue, fps, glow_size, physics_max, plan_dom;
         var glow_start_color, glow_end_color, physics_on, orig_move_obj;
         var mouse_status, last_mouse_obj, planfile_html, planfile_hidden_html;
+        var plan_git_url;
+
 
         // ***** Configuration *****
         // Screen positioning and distance configuration
@@ -218,6 +220,10 @@
                 "        href: https://github.com/paulczar/solum-example-app-ghost.git\n" +
                 "    language_pack: auto\n";
 
+            plan_git_url = document.getElementById("hidden_github_url").value;
+            if (plan_git_url.length < 5) // Make it look real for the demo if missing
+                plan_git_url = "https://github.com/solum_demo/";
+
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);
             createjs.Ticker.addEventListener("tick", solum_tick);
@@ -237,20 +243,14 @@
 
             var plan_header = "camp_version: CAMP 1.1\n";
             var artifacts_header = "artifacts:\n";
-            // Fill in ARTIFACT_URL with git repo url, NUM_INSTANCES with the number of
-            // apps to run.
             var artifact_template = "    artifact_type: application.heroku\n" +
                 "    content:\n        href: ARTIFACT_URL\n    instances: NUM_INSTANCES\n" +
                 "    requirements:\n        requirement_type: org.solum:BuildUsing\n" +
                 "        fulfillment: id:langpack-auto\n\n";
-            // Fill in CONNECT_TYPE with "To" or "From", FULFILL_ID with the real id like "db_1"
-            // Also need to figure out the ??? sections
             var artifact_connect_template = "        requirement_type: CONNECT_TYPE\n" +
                 "        fulfillment: id:FULFILL_ID\n\n";
             var services_header = "services:";
-            // Fill in SERVICE_ID
             var service_template = "\n    id: SERVICE_ID\n    characteristics:\n";
-            // Fill in CHAR_TYPE
             var service_characteristic_template = "        characteristic_type: CHAR_TYPE\n";
 
             // Hard coded example/test following...
@@ -265,8 +265,8 @@
                     if (obj.connection_list.length > 0) {
                         if (obj.conn_type == 1) { // Artifact/Language Pack/Application/etc
                             temp_str = artifact_template;
-// TODO: need git url
-                            temp_str = temp_str.replace("ARTIFACT_URL", "???artifact_url???");
+                            var new_url = plan_git_url + obj.icon_name + "_" + obj.id;
+                            temp_str = temp_str.replace("ARTIFACT_URL", new_url);
                             temp_str = temp_str.replace("NUM_INSTANCES", "1");
                             out_str += temp_str;
 
