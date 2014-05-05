@@ -264,8 +264,10 @@
                     if (obj.connection_list.length > 0) {
                         if (obj.conn_type == 1) { // Artifact/Language Pack/Application/etc
                             temp_str = artifact_template;
-                            var new_url = plan_git_url + obj.icon_name + "_" + obj.id;
-                            temp_str = temp_str.replace("ARTIFACT_URL", new_url);
+// Can re-enable this to add type of artifact and unique ID to the end
+//                            var new_url = plan_git_url + obj.icon_name + "_" + obj.id;
+//                            temp_str = temp_str.replace("ARTIFACT_URL", new_url);
+                            temp_str = temp_str.replace("ARTIFACT_URL", plan_git_url);
                             temp_str = temp_str.replace("NUM_INSTANCES", "1");
                             out_str += temp_str;
 
