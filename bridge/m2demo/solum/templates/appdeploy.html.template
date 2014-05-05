@@ -7,7 +7,7 @@
 <div id="content_body">
     <div class="span12" id="build_workflow">
         <center>
-            <canvas id="buildstatus" height="100" width="500"></canvas>
+            <canvas id="buildstatus" height="100" width="700"></canvas>
         </center>
     </div>
     <br><br><br><br><br><br><br><br>
@@ -27,6 +27,8 @@
           $(this).parents(".btn-group").find('.btn-default').val($(this).text());
        });
     });
-$( document ).ready(function(){update_status('{{ assembly.status }}');});
+$( document ).ready(function(){
+    update_status('{{ assembly.status }}');
+});
  </script>
 {% endblock %}
