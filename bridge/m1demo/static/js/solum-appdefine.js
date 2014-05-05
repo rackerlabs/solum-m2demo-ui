@@ -47,7 +47,7 @@
         lb_name = "lb";
         lb_x_scale = 0.8;
         lb_y_scale = 0.8;
-        lb_x = 35;
+        lb_x = 40;
         lb_y = 300;
         lb_conn_type = 0;
         lb_camp_connect_type = "org.solum.reverseproxy:ConnectFrom";
@@ -169,13 +169,13 @@
                 newrelic_y_scale, newrelic_conn_type, newrelic_camp_connect_type, newrelic_camp_char_type);
 
             var rect = new createjs.Shape();
-            rect.graphics.beginFill("#DDDDDD").drawRect(0, 0, 70, 600); // Was #F7DFF9
+            rect.graphics.beginFill("#DDDDDD").drawRect(0, 85, 80, 600); // Was #F7DFF9
             rect.alpha = 0.5;
             stage.addChild(rect);
             stage.setChildIndex(rect, 0);
 
             var rect = new createjs.Shape();
-            rect.graphics.beginFill("#DDDDDD").drawRect(720, 0, 750, 600); // Was #CCFFFF
+            rect.graphics.beginFill("#DDDDDD").drawRect(720, 85, 750, 600); // Was #CCFFFF
             rect.alpha = 0.5;
             stage.addChild(rect);
             stage.setChildIndex(rect, 0);
@@ -188,27 +188,27 @@
 
 
             // Set up labels and some lines
-            solum_draw_line(0, 0, 800, 0, "black", 3);
-            solum_draw_line(0, 0, 0, 800, "black", 3);
-            solum_draw_line(0, 600, 800, 600, "black", 3);
-            solum_draw_line(800, 0, 800, 600, "black", 3);
+            solum_draw_line(0, 0, 800, 0, "#999999", 3);
+            solum_draw_line(0, 0, 0, 800, "#999999", 3);
+            solum_draw_line(0, 600, 800, 600, "#999999", 3);
+            solum_draw_line(800, 0, 800, 600, "#999999", 3);
 
-            solum_draw_line(70, 85, 720, 85, "black", 1);
-            solum_draw_line(70, 85, 70, 600, "black", 1);
-            solum_draw_line(720, 85, 720, 600, "black", 1);
+            solum_draw_line(80, 85, 720, 85, "#999999", 1);
+            solum_draw_line(80, 85, 80, 600, "#999999", 1);
+            solum_draw_line(720, 85, 720, 600, "#999999", 1);
 
             
             solum_create_text("Python 2.7", "17px Arial", 210, 65);
             solum_create_text("Java 7", "17px Arial", 328, 65);
             solum_create_text("Ruby 2.1.1", "17px Arial", 410, 65);
             solum_create_text("Node.js 0.10.26", "17px Arial", 505, 65);
-            solum_create_text("Load\nBalancer", "15px Arial", 7, 330);
-            solum_create_text("New\nRelic", "15px Arial", 745, 225);
-            solum_create_text("Trove", "15px Arial", 740, 328);
+            solum_create_text("   Load\nBalancer", "17px Arial", 7, 330);
+            solum_create_text("New\nRelic", "17px Arial", 743, 225);
+            solum_create_text("Trove", "17px Arial", 738, 328);
             solum_create_text("Memcached", "13px Arial", 723, 428);
             solum_create_text("Language\nPacks:", "bold 17px Arial", 100, 30);
             solum_create_text("Services:", "bold 17px Arial", 722, 120);
-            solum_create_text("Network:", "bold 16px Arial", 2, 220);
+            solum_create_text("Network:", "bold 17px Arial", 5, 220);
 
             // Plan text box
             planfile_html = document.getElementById("planfile");
