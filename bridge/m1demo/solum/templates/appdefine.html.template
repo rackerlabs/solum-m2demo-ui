@@ -6,7 +6,7 @@
 <script type="text/javascript" src="/static/js/solum-bridgecomm.js"></script>
 <script type="text/javascript">
 function solum_deployapp(){
-    var plantext = $("textarea#planfile").val();
+    var plantext = $("textarea#planfile_hidden").val();
     var result = createApp(plantext);
     var now = new Date();
     var name = result.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes();
@@ -34,6 +34,8 @@ artifacts:
     href: https://github.com/paulczar/solum-example-app-ghost.git
   language_pack: auto
         </textarea>
+
+        <textarea id="planfile_hidden" cols="60" rows="25" style="display:none;"></textarea>
 
         <br>
         <button><b>Generate Plan</b></button>

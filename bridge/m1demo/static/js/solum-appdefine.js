@@ -19,7 +19,7 @@
         // General global variables
         var canvas, stage, queue, fps, glow_size, physics_max, plan_dom;
         var glow_start_color, glow_end_color, physics_on, orig_move_obj;
-        var mouse_status, last_mouse_obj, planfile_html;
+        var mouse_status, last_mouse_obj, planfile_html, planfile_hidden_html;
 
         // ***** Configuration *****
         // Screen positioning and distance configuration
@@ -212,6 +212,12 @@
             planfile_html = document.getElementById("planfile");
             planfile_html.value = "camp_version: CAMP 1.1\nartifacts:\nservices:\n";
 
+            planfile_hidden_html = document.getElementById("planfile_hidden");
+            planfile_hidden_html.value = "name: ghost\ndescription: ghost blogging platform\nartifacts:\n" +
+                "    name: ghost\n    artifact_type: application.heroku\n    content:\n" +
+                "        href: https://github.com/paulczar/solum-example-app-ghost.git\n" +
+                "    language_pack: auto\n";
+
             // Create the main stage ticker to keep everything updated
             createjs.Ticker.setFPS(fps);
             createjs.Ticker.addEventListener("tick", solum_tick);
@@ -220,12 +226,6 @@
 
 
         function solum_create_plan() {
-// TODO: See if we can make this real later; solum doesn't understand the complete plan below yet
-//            return "name: ghost\ndescription: ghost blogging platform\nartifacts:\n" +
-//                "    name: ghost\n    artifact_type: application.heroku\n    content:\n" +
-//                "        href: https://github.com/paulczar/solum-example-app-ghost.git\n" +
-//                "    language_pack: auto\n"
-
 // TODO: add SQL initialization script; example:
 //   artifact_type: org.sql:SqlScript
 //    content:
@@ -300,7 +300,6 @@
                     }
                 }
             }
-
             return out_str;
         }
 
