@@ -24,18 +24,10 @@ function solum_deployapp(){
 
     <div style="float:right" >
     <form>
-        <textarea id="planfile" cols="60" rows="25" wrap="off">
-name: ghost
-description: ghost blogging platform
-artifacts:
-- name: ghost
-  artifact_type: application.heroku
-  content:
-    href: https://github.com/paulczar/solum-example-app-ghost.git
-  language_pack: auto
-        </textarea>
+        <textarea id="planfile" cols="60" rows="25" wrap="off"></textarea>
 
         <textarea id="planfile_hidden" cols="60" rows="25" style="display:none;"></textarea>
+        <input type="hidden" id="hidden_github_url" name="hidden_github_url">
 
         <br>
         <button><b>Generate Plan</b></button>
@@ -46,9 +38,9 @@ artifacts:
     <hr>
 
     <div style="float:left">
-    Instructions: Drag and drop the icons in the canvas area.  Then right click two separate
+    Instructions: Drag and drop the icons in the canvas area then right click two separate
     icons to draw a line between them or to remove the connection.<br>
-    Rules: Load Balancers connect to Language Packs which connect to Services.<br><br>
+    Rules: Networks connect only to Language Packs which connect only to Services.<br><br>
     </div>
 </div>
 {% endblock %}
