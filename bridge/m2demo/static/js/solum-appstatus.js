@@ -6,7 +6,7 @@ function solum_draw_status(context, states) {
         DISABLED: "#ccc",
         DEFAULT: "#000",
     }
-    context.clearRect(0, 0, 500, 500);
+    context.clearRect(0, 0, 700, 100);
 
     context.fillStyle = "transparent";
     context.strokeStyle = COLORS.DEFAULT;
@@ -97,6 +97,14 @@ function build_status(string) {
             'name': 'Template',
             'img': 'setting-icon',
         },
+        {
+            'name': 'Heat',
+            'img': 'fire-icon',
+        },
+        {
+            'name': 'Complete',
+            'img': 'browser-icon',
+        },
     ];
     switch (string) {
     case 'PENDING':
@@ -110,68 +118,33 @@ function build_status(string) {
         S[1].status = 'PASSED';
         S[3].status = 'PASSED';
         S[4].status = 'PASSED';
+        S[5].status = 'PENDING';
         break;
     case 'READY':
         S[0].status = 'PASSED';
         S[1].status = 'PASSED';
         S[3].status = 'PASSED';
         S[4].status = 'PASSED';
+        S[5].status = 'PASSED';
+        S[6].status = 'PASSED';
         break;
     case 'ERROR':
         S[0].status = 'PASSED';
         S[1].status = 'PASSED';
         S[3].status = 'PASSED';
         S[4].status = 'PASSED';
+        S[5].status = 'FAILED';
         break;
     case 'ERROR_STACK_CREATE_FAILED':
         S[0].status = 'PASSED';
         S[1].status = 'PASSED';
         S[3].status = 'PASSED';
-        S[4].status = 'PASSED';
+        S[4].status = 'FAILED';
         break;
     }
 
     return S;
 }
-
-function deploy_status(string) {
-    var S = [
-        {
-            'name': 'Start',
-            'img': 'download-icon',
-        },
-        {
-            'name': 'Heat',
-            'img': 'fire-icon',
-        },
-        {
-            'name': 'Complete',
-            'img': 'browser-icon',
-        },
-    ];
-    switch (string) {
-    case 'DEPLOYING':
-        S[0].status = 'PASSED';
-        S[1].status = 'PENDING';
-        break;
-    case 'READY':
-        S[0].status = 'PASSED';
-        S[1].status = 'PASSED';
-        S[2].status = 'PASSED';
-        break;
-    case 'ERROR':
-        S[0].status = 'PASSED';
-        S[1].status = 'FAILED';
-        break;
-    case 'ERROR_STACK_CREATE_FAILED':
-        S[0].status = 'FAILED';
-        break;
-    }
-
-    return S;
-}
-
-
 
 function update_status(status_string) {
     var stat = build_status(status_string);
@@ -180,6 +153,4 @@ function update_status(status_string) {
         var context = canv.getContext("2d");
         solum_draw_status(context, stat);
     }
-
-    stat = deploy_status(status_string);
 }
