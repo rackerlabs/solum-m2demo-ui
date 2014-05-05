@@ -167,19 +167,19 @@
                 newrelic_y_scale, newrelic_conn_type, newrelic_camp_connect_type, newrelic_camp_char_type);
 
             var rect = new createjs.Shape();
-            rect.graphics.beginFill("#F7DFF9").drawRect(0, 0, 70, 600);
+            rect.graphics.beginFill("#DDDDDD").drawRect(0, 0, 70, 600); // Was #F7DFF9
             rect.alpha = 0.5;
             stage.addChild(rect);
             stage.setChildIndex(rect, 0);
 
             var rect = new createjs.Shape();
-            rect.graphics.beginFill("#CCFFFF").drawRect(720, 0, 750, 600);
+            rect.graphics.beginFill("#DDDDDD").drawRect(720, 0, 750, 600); // Was #CCFFFF
             rect.alpha = 0.5;
             stage.addChild(rect);
             stage.setChildIndex(rect, 0);
 
             var rect = new createjs.Shape();
-            rect.graphics.beginFill("#FFCCCC").drawRect(0, 0, 800, 85);
+            rect.graphics.beginFill("#DDDDDD").drawRect(0, 0, 800, 85); // Was #FFCCCC
             rect.alpha = 0.5;
             stage.addChild(rect);
             stage.setChildIndex(rect, 0);
