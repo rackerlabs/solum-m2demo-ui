@@ -27,10 +27,9 @@ function solum_deployapp(){
         <textarea id="planfile" cols="60" rows="25" wrap="off"></textarea>
 
         <textarea id="planfile_hidden" cols="60" rows="25" style="display:none;"></textarea>
-        <input type="hidden" id="hidden_github_url" name="hidden_github_url">
+        <input type="hidden" id="hidden_github_url" name="hidden_github_url" value="{{ git_url }}"></input>
 
         <br>
-        <button><b>Generate Plan</b></button>
         <button onClick="solum_deployapp()"><b>Deploy App</b></button>
     </form>
     </div>

@@ -2,19 +2,22 @@
 {% block title %}Usage Overview - OpenStack Dashboard{% endblock %}
 {% block extraheaddata %}
     <script type="text/javascript" src="/static/js/solum-getplanfile.js"></script>
+    <script src="/static/js/solum-bridgecomm.js"></script>
     <script type="text/javascript">
         function popGetPlanfile() {
-            $("textarea#planfile").val(getPlanFile($("#githuburl").val()));
-            
-            str = getPlanFile($("#githuburl").val());
-            if ((str.toUpperCase() == "")) {
-                window.location = '/solum/newapp';
+            var githuburl = $("#githuburl").val();
+            var plantext = getPlanFile(githuburl);
+            if ((plantext == "")) {
+                window.location = '/solum/newapp?githuburl=' + githuburl;
             } else {
-                window.location = '/solum/app/3cd8c40e-8f2d-44d4-b109-659c1511e556';
+                var plan = createApp(plantext)
+                var now = new Date();
+                var name = plan.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes();
+                var assembly = createAssembly(plan.uri, name);
+                window.location = '/solum/app/' + assembly.uuid;
             }
         }
     </script>
-    <script src="/static/js/solum-bridgecomm.js"></script>
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
