@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /opt/stack/solum-gui/bridge/m1demo
+cd /opt/stack/solum-gui/bridge/m2demo
 screen -dmS bridge
 screen -S bridge -p 0 -X stuff 'python ./manage.py runserver 0.0.0.0:9001
 '
