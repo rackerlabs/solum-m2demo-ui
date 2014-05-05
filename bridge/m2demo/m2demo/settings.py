@@ -1,5 +1,5 @@
 """
-Django settings for m1demo project.
+Django settings for m2demo project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -48,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'm1demo.urls'
+ROOT_URLCONF = 'm2demo.urls'
 
-WSGI_APPLICATION = 'm1demo.wsgi.application'
+WSGI_APPLICATION = 'm2demo.wsgi.application'
 
 
 # Database
@@ -85,7 +85,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (
-    ("images", "/opt/stack/solum-gui/bridge/m1demo/static/images"),
-    ("js", "/opt/stack/solum-gui/bridge/m1demo/static/js"),
-    ("css", "/opt/stack/solum-gui/bridge/m1demo/static/css"),
+    ("images", "/opt/stack/solum-gui/bridge/m2demo/static/images"),
+    ("js", "/opt/stack/solum-gui/bridge/m2demo/static/js"),
+    ("css", "/opt/stack/solum-gui/bridge/m2demo/static/css"),
 )
