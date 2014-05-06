@@ -5,84 +5,79 @@
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
-    <div class="span12" id="build_workflow">
-        <center>
-            <canvas id="buildstatus" height="100" width="0"></canvas>
-        </center>
+    <table class="table table-hover table-condensed" width=60%>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Version</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>MyJavaApp</td>
+                <td>1.0</td>
+                <td>4/21/2014</td>
+                <td>
+                    <button class="btn btn-mini btn-sm">Select</button>     
+                </td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>MyJavaApp</td>
+                <td>2.7</td>
+                <td>4/21/2014</td>
+                <td>
+                    <button class="btn btn-mini btn-sm">Select</button>  
+                </td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>MyJavaApp</td>
+                <td>2.0</td>
+                <td>4/21/2014</td>
+                <td>
+                    <button class="btn btn-mini btn-sm">Select</button>   
+                </td>
+            </tr>
+        </tbody>                           
+    </table>
+    <div class="container" id="deploy_control">
+        <div class="btn-group pull-left">
+            <button id="env_button" 
+                    class="btn btn-default" 
+                    style="width:110px">Environments
+            </button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Dev</a></li>
+                <li><a href="#">Test</a></li>
+                <li><a href="#">Staging</a></li>
+                <li><a href="#">Production</a></li>
+            </ul>
+        </div>
+        <div class="col-md-2 column">
+                <button id="dep_button" 
+                        class="btn btn-success" 
+                        style="width:110px">Deploy</button>
+        </div>
+        <div class="col-md-2 column">
+                <button id="dep_button" 
+                        class="btn btn-warning" 
+                        style="width:110px">Stop</button>
+        </div>
+        <div class="col-md-2 column">
+                <button id="dep_button" 
+                        class="btn btn-danger" 
+                        style="width:110px">Destroy</button>
+        </div>
     </div>
-            <table class="table table-hover table-condensed" width=60%>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Version</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td>MyJavaApp</td>
-                        <td>1.0</td>
-                        <td>4/21/2014</td>
-                        <td>
-                            <button class="btn btn-mini btn-sm">Select</button>     
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <td>MyJavaApp</td>
-                        <td>2.7</td>
-                        <td>4/21/2014</td>
-                        <td>
-                            <button class="btn btn-mini btn-sm">Select</button>  
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td>MyJavaApp</td>
-                        <td>2.0</td>
-                        <td>4/21/2014</td>
-                        <td>
-                            <button class="btn btn-mini btn-sm">Select</button>   
-                        </td>
-                    </tr>
-                </tbody>                           
-            </table>
-                <div class="container" id="deploy_control">
-                    <div class="btn-group pull-left">
-                        <button id="env_button" 
-                                class="btn btn-default" 
-                                style="width:110px">Environments
-                        </button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Dev</a></li>
-                            <li><a href="#">Test</a></li>
-                            <li><a href="#">Staging</a></li>
-                            <li><a href="#">Production</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 column">
-                            <button id="dep_button" 
-                                    class="btn btn-success" 
-                                    style="width:110px">Deploy</button>
-                    </div>
-                    <div class="col-md-2 column">
-                            <button id="dep_button" 
-                                    class="btn btn-warning" 
-                                    style="width:110px">Stop</button>
-                    </div>
-                    <div class="col-md-2 column">
-                            <button id="dep_button" 
-                                    class="btn btn-danger" 
-                                    style="width:110px">Destroy</button>
-                    </div>
-                </div>
-                <br><br><br><br>
+    <br><br><br><br>
 </div>
 {% endblock %}
 {% block extrafooter %}
@@ -94,6 +89,5 @@
           $(this).parents(".btn-group").find('.btn-default').val($(this).text());
        });
     });
-$( document ).ready(function(){update_status('{{ assembly.status }}');});
  </script>
 {% endblock %}
