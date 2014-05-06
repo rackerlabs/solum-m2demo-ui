@@ -39,7 +39,7 @@ function refresh_status(){
 }
 
 $( document ).ready(function(){
-    //update_status('{{ assembly.status }}');
+    update_status('{{ assembly.status }}');
     setInterval(refresh_status, 1000);
 });
  </script>
