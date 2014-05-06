@@ -31,12 +31,10 @@ def app(req, app_id):
     response["Access-Control-Allow-Origin"] = "*"
     return response
 
-def appmanage(req):
+def appmanage(req, app_id):
     # Display App Definition page.
-    git_url = ''
-    if req.method == 'GET':
-        git_url = req.GET.get('git', '')
-    context = {'git_url': git_url}
+    app_ = solum_models.Assembly.objects.get(uuid=app_id)
+    context = {'assembly': app_}
     response = render(req, 'appmanage.html.template', context)
     response["Access-Control-Allow-Origin"] = "*"
     return response

@@ -12,7 +12,7 @@
             } else {
                 var plan = createApp(plantext)
                 var now = new Date();
-                var name = plan.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes();
+                var name = plan.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes() + '.' + now.getSeconds();
                 var assembly = createAssembly(plan.uri, name);
                 window.location = '/solum/app/' + assembly.uuid;
             }
@@ -43,10 +43,10 @@
                 </td>
                 <td><a href="/solum/app/{{ a.uuid }}">{{ a.status }}</a></td>
                 <td>
-                    <a href="/solum/newapp">
+                    <a href="/solum/newapp?githuburl={{ a.git_url }}">
                         <button class="btn btn-info btn-sm" style="width:30%">Update</button>
                     </a>
-                    <a href="/solum/appmanage">
+                    <a href="/solum/appmanage?assembly_id={{ a.uuid }}">
                         <button class="btn btn-info btn-sm" style="width:30%">Manage</button>
                     </a>
                 </td>
