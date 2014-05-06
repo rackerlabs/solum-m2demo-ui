@@ -1,6 +1,7 @@
 {% extends "horizonish.template" %}
 {% block title %}Solum - Manage Application{% endblock %}
 {% block extraheaddata %}
+<script src="/static/js/solum-bridgecomm.js"></script>
 <script src="/static/js/solum-appstatus.js"></script>
 {% endblock %}
 {% block solumbody %}
@@ -27,8 +28,19 @@
           $(this).parents(".btn-group").find('.btn-default').val($(this).text());
        });
     });
+var LAST_STATUS = '';
+
+function refresh_status(){
+  var assembly = getAssembly('{{ assembly.uuid }}');
+  if(assembly.status != LAST_STATUS){
+    update_status(assembly.status);
+  }
+  LAST_STATUS = assembly.status;
+}
+
 $( document ).ready(function(){
-    update_status('{{ assembly.status }}');
+    //update_status('{{ assembly.status }}');
+    setInterval(refresh_status, 1000);
 });
  </script>
 {% endblock %}
