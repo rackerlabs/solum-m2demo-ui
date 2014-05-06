@@ -33,10 +33,10 @@ def app(req, app_id):
 
 def appmanage(req):
     # Display App Definition page.
-    git_url = ''
+    assembly_id = ''
     if req.method == 'GET':
-        git_url = req.GET.get('git', '')
-    context = {'git_url': git_url}
+        assembly_id = req.GET.get('assembly_id', '')
+    context = {'assembly_id': assembly_id}
     response = render(req, 'appmanage.html.template', context)
     response["Access-Control-Allow-Origin"] = "*"
     return response
