@@ -62,7 +62,7 @@
                 </td>
                 <td>{{ a.name }}</td>
                 <td>{{ a.description }}</td>
-                <td><a href="{{ a.application_uri }}">{{ a.application_uri }}</a>
+                <td><a href="{{ a.application_uri }}" target="_blank">{{ a.application_uri }}</a>
                 </td>
                 <td><a href="/solum/app/{{ a.uuid }}">{{ a.status }}</a></td>
                 <td>
