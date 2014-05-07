@@ -67,7 +67,7 @@
                 <td><a href="/solum/app/{{ a.uuid }}">{{ a.status }}</a></td>
                 <td>
                     <a href="/solum/newapp?githuburl={{ a.git_url }}">
-                        <button class="btn btn-info btn-sm" style="width:30%">Update</button>
+                        <button class="btn btn-info btn-sm invisible" style="width:30%">Update</button>
                     </a>
                     <a href="/solum/appmanage/{{ a.uuid }}">
                         <button class="btn btn-info btn-sm" style="width:30%">Manage</button>
