@@ -13,10 +13,8 @@
     </div>
     <br><br><br><br><br><br><br><br>
     <center>
-    <button id="dep_button" 
-            class="btn btn-info" 
-            style="width:90px">Done</button>
-            </center>
+        <a class="btn btn-info" style="width:90px" href="/solum">Done</a>
+    </center>
 </div>
 {% endblock %}
 {% block extrafooter %}

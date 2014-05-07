@@ -5,6 +5,8 @@
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
+<h1>Application: {{assembly.name}}</h1>
+<br>
     <table class="table table-hover table-condensed" width=60%>
         <thead>
             <tr>
@@ -18,27 +20,27 @@
         <tbody>
             <tr>
                 <th>1</th>
-                <td>MyJavaApp</td>
+                <td>{{ assembly.name }}</td>
                 <td>1.0</td>
-                <td>4/21/2014</td>
+                <td>{{ assembly.created_at}}</td>
                 <td>
                     <button class="btn btn-mini btn-sm">Select</button>     
                 </td>
             </tr>
             <tr>
                 <th>2</th>
-                <td>MyJavaApp</td>
+                <td>{{ assembly.name }}</td>
                 <td>2.7</td>
-                <td>4/21/2014</td>
+                <td>{{ assembly.created_at}}</td>
                 <td>
                     <button class="btn btn-mini btn-sm">Select</button>  
                 </td>
             </tr>
             <tr>
                 <th>3</th>
-                <td>MyJavaApp</td>
+                <td>{{ assembly.name }}</td>
                 <td>2.0</td>
-                <td>4/21/2014</td>
+                <td>{{ assembly.created_at}}</td>
                 <td>
                     <button class="btn btn-mini btn-sm">Select</button>   
                 </td>
