@@ -12,7 +12,7 @@
             } else {
                 var plan = createApp(plantext)
                 var now = new Date();
-                var name = plan.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes() + '.' + now.getSeconds();
+                var name = plan.name + '_' + now.getMonth() + '_' + now.getDate() + '_' + now.getHours() + '_' + now.getMinutes() + '_' + now.getSeconds();
                 var assembly = createAssembly(plan.uri, name);
                 window.location = '/solum/app/' + assembly.uuid;
             }
