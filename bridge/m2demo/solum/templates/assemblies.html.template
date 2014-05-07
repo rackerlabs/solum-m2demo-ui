@@ -36,6 +36,7 @@
                 var name = plan.name + '_' + now.getMonth() + '_' + now.getDate() + '_' + now.getHours() + '_' + now.getMinutes() + '_' + now.getSeconds();
                 var assembly = createAssembly(plan.uri, name);
                 uuid = assembly.uuid;
+                $("#myModal").modal("hide");
                 $("#deployStatus").modal("show");
                 startStatus();
             }
@@ -115,14 +116,14 @@
     
     <!-- Modal window for App deploy status -->
     <div class="modal hide fade" id="deployStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:800">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">App Status</h4>
                 </div>
                 <div class="modal-body" style="white-space:nowrap">
-                    <canvas id="buildstatus" height="100" width="700"></canvas>
+                    <canvas id="buildstatus" height="100" width="680"></canvas>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="stopStatus()">Close</button>
