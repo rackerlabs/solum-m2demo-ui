@@ -19,26 +19,20 @@
 {% endblock %}
 {% block extrafooter %}
 <!-- scripts -->
- <script>
-     $(function(){
-        $(".dropdown-menu li a").click(function(){
-          $(this).parents(".btn-group").find('.btn-default').text($(this).text());
-          $(this).parents(".btn-group").find('.btn-default').val($(this).text());
-       });
+<script>
+    var LAST_STATUS = '';
+
+    function refresh_status(){
+      var assembly = getAssembly('{{ assembly.uuid }}');
+      if(assembly.status != LAST_STATUS){
+        update_status(assembly.status);
+      }
+      LAST_STATUS = assembly.status;
+    }
+
+    $( document ).ready(function(){
+        update_status('{{ assembly.status }}');
+        setInterval(refresh_status, 1000);
     });
-var LAST_STATUS = '';
-
-function refresh_status(){
-  var assembly = getAssembly('{{ assembly.uuid }}');
-  if(assembly.status != LAST_STATUS){
-    update_status(assembly.status);
-  }
-  LAST_STATUS = assembly.status;
-}
-
-$( document ).ready(function(){
-    update_status('{{ assembly.status }}');
-    setInterval(refresh_status, 1000);
-});
- </script>
+</script>
 {% endblock %}
