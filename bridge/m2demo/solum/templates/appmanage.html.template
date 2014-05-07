@@ -14,7 +14,7 @@
                 <th>Image</th>
                 <th>Version</th>
                 <th>Date</th>
-                <th>Action</th>
+                <th>Select Image</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
                 <td>1.0</td>
                 <td>{{ assembly.created_at}}</td>
                 <td>
-                    <button class="btn btn-mini btn-sm">Select</button>     
+                    <input type="radio" name="image_select" value="1" checked>
                 </td>
             </tr>
             <tr>
@@ -33,7 +33,7 @@
                 <td>2.7</td>
                 <td>{{ assembly.created_at}}</td>
                 <td>
-                    <button class="btn btn-mini btn-sm">Select</button>  
+                    <input type="radio" name="image_select" value="1">
                 </td>
             </tr>
             <tr>
@@ -42,43 +42,85 @@
                 <td>2.0</td>
                 <td>{{ assembly.created_at}}</td>
                 <td>
-                    <button class="btn btn-mini btn-sm">Select</button>   
+                    <input type="radio" name="image_select" value="1">
                 </td>
             </tr>
         </tbody>                           
     </table>
-    <div class="container" id="deploy_control">
-        <div class="btn-group pull-left">
-            <button id="env_button" 
-                    class="btn btn-default" 
-                    style="width:110px">Environments
-            </button>
-            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Dev</a></li>
-                <li><a href="#">Test</a></li>
-                <li><a href="#">Staging</a></li>
-                <li><a href="#">Production</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2 column">
-                <button id="dep_button" 
-                        class="btn btn-success" 
-                        style="width:110px">Deploy</button>
-        </div>
-        <div class="col-md-2 column">
-                <button id="dep_button" 
-                        class="btn btn-warning" 
-                        style="width:110px">Stop</button>
-        </div>
-        <div class="col-md-2 column">
-                <button id="dep_button" 
-                        class="btn btn-danger" 
-                        style="width:110px">Destroy</button>
-        </div>
-    </div>
+    <table>
+        <tr>
+           <td>
+                 <b>Environments:</b>
+                <select style="width:125px">
+                    <option value="dev">Development</option>
+                    <option value="test">Test</option>
+                    <option value="staging">Staging</option>
+                    <option value="production">Production</option>
+                </select>
+                &nbsp;&nbsp;
+           </td>
+
+           <td>
+                <b>Instances:&nbsp;</b>
+                <select style="width:100px">
+                    <option value="1" selected="selected">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                &nbsp;&nbsp;
+            </td>
+
+           <td>
+                 <b>Memory Quota:</b>
+                <select style="width:100px">
+                    <option value="512MB">512 MB</option>
+                    <option value="1GB">1 GB</option>
+                    <option value="2GB">2 GB</option>
+                    <option value="4GB">4 GB</option>
+                    <option value="8GB">8 GB</option>
+                    <option value="16GB">16 GB</option>
+                </select>
+                &nbsp;&nbsp;
+           </td>
+
+        </tr>
+    </table>
+    <table>
+            <td>
+                <div class="col-md-2 column">
+                        <button id="dep_button" 
+                                class="btn btn-warning" 
+                                style="width:110px">Stop</button>
+                </div>
+            </td>
+
+            <td>
+                <div class="col-md-2 column">
+                        <button id="dep_button" 
+                                class="btn btn-danger" 
+                                style="width:110px">Destroy</button>
+                </div>
+            </td>
+
+            <td>
+                <div class="col-md-2 column">
+                        <button id="dep_button" 
+                                class="btn btn-success" 
+                                style="width:110px">Deploy</button>
+                </div>
+            </td>
+
+
+    </table>
+
+
     <br><br><br><br>
 </div>
 {% endblock %}
