@@ -5,7 +5,12 @@
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
-<h1>Application: {{assembly.name}}</h1>
+<h2>Manage Application</h2>
+<br>
+<h3>Application: {{assembly.name}}</h3>
+<div align="right"><b>Status: <font size="4" color="green">Running</font><br>
+Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a></b>
+</div>
 <br>
     <table class="table table-hover table-condensed" width=60%>
         <thead>
@@ -21,8 +26,8 @@
             <tr>
                 <th>1</th>
                 <td>{{ assembly.name }}</td>
-                <td>1.0</td>
-                <td>{{ assembly.created_at}}</td>
+                <td>1.0.1</td>
+                <td>May 1, 2014, 2:12 p.m.</td>
                 <td>
                     <input type="radio" name="image_select" value="1" checked>
                 </td>
@@ -30,8 +35,8 @@
             <tr>
                 <th>2</th>
                 <td>{{ assembly.name }}</td>
-                <td>2.7</td>
-                <td>{{ assembly.created_at}}</td>
+                <td>1.5.7</td>
+                <td>May 5 2014, 4:11 p.m.</td>
                 <td>
                     <input type="radio" name="image_select" value="1">
                 </td>
@@ -39,8 +44,8 @@
             <tr>
                 <th>3</th>
                 <td>{{ assembly.name }}</td>
-                <td>2.0</td>
-                <td>{{ assembly.created_at}}</td>
+                <td>1.9.1</td>
+                <td>May 7 2014, 9:19 a.m.</td>
                 <td>
                     <input type="radio" name="image_select" value="1">
                 </td>
@@ -97,7 +102,7 @@
                 <div class="col-md-2 column">
                         <button id="dep_button" 
                                 class="btn btn-warning" 
-                                style="width:110px">Stop</button>
+                                style="width:110px">Stop App</button>
                 </div>
             </td>
 
@@ -105,7 +110,7 @@
                 <div class="col-md-2 column">
                         <button id="dep_button" 
                                 class="btn btn-danger" 
-                                style="width:110px">Destroy</button>
+                                style="width:110px">Destroy App</button>
                 </div>
             </td>
 
@@ -113,7 +118,7 @@
                 <div class="col-md-2 column">
                         <button id="dep_button" 
                                 class="btn btn-success" 
-                                style="width:110px">Deploy</button>
+                                style="width:110px">Deploy App</button>
                 </div>
             </td>
 
