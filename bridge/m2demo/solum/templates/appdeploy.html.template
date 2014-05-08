@@ -3,36 +3,67 @@
 {% block extraheaddata %}
 <script src="/static/js/solum-bridgecomm.js"></script>
 <script src="/static/js/solum-appstatus.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/deploy-workflow.css">
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">
-    <div class="span12" id="build_workflow">
-        <center>
-            <canvas id="buildstatus" height="100" width="700"></canvas>
-        </center>
-    </div>
-    <br><br><br><br><br><br><br><br>
-    <center>
-        <a class="btn btn-info" style="width:90px" href="/solum">Done</a>
-    </center>
-</div>
+    <div id="appstatus">
+        <abbr id="clone_abbr">
+            <div id="clone" class="box"></div>
+        </abbr>
+        &#8674;
+        
+        <abbr id="build_abbr">
+            <div id="build" class="box"></div>
+        </abbr>
+        &#8674;
+
+        <abbr id="test_abbr">
+            <div id="test" class="box"></div>
+        </abbr>
+        &#8674;
+
+        <abbr id="package_abbr">
+            <div id="package" class="box"></div>
+        </abbr>
+        &#8674;
+
+        <abbr id="template_abbr">
+            <div id="template" class="box"></div>
+        </abbr>
+        &#8674;
+
+        <abbr id="deploy_abbr">
+            <div id="deploy" class="box"></div>
+        </abbr>
+        &#8674;
+
+        <abbr id="complete_abbr">
+            <div id="complete" class="box"></div>
+        </abbr>
+        
+    <br><br>
+
+    <h3>Current status:
+    <span id="currentstatus">Pending</span><span id="workflow_tick">.</span></h3>
+    <a class="btn btn-info" style="width:90px" href="/solum">Done</a>
+
 {% endblock %}
 {% block extrafooter %}
-<!-- scripts -->
-<script>
-    var LAST_STATUS = '';
+    
+    <script src="/static/js/solum-deploy-workflow.js"></script>
+    <script type="text/javascript">
+        function refresh_status() {
+            var assembly = getAssembly('{{ assembly.uuid }}');
+            if (assembly.status != LAST_STATUS) {
+                updateStatus(assembly.status);
+            }
+            LAST_STATUS = assembly.status;
+        }
 
-    function refresh_status(){
-      var assembly = getAssembly('{{ assembly.uuid }}');
-      if(assembly.status != LAST_STATUS){
-        update_status(assembly.status);
-      }
-      LAST_STATUS = assembly.status;
-    }
-
-    $( document ).ready(function(){
-        update_status('{{ assembly.status }}');
-        setInterval(refresh_status, 1000);
-    });
-</script>
+        $( document ).ready(function(){
+            updateStatus('{{ assembly.status }}');
+            poll_interval = setInterval(refresh_status, 1000);
+        });
+    </script>
 {% endblock %}

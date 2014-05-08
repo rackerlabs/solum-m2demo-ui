@@ -1,0 +1,83 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+}
+#appstatus .box {
+    display: inline-block;
+    position: relative;
+    margin: 1%;
+    width: 90px;
+    height: 90px;
+    border: 1px solid #000;
+    background: #ccc;
+    text-align: center;
+    background-size: 100% auto;
+}
+#appstatus #clone.box {
+    background-image: url('/static/images/build_workflow/github.png');
+    background-size: 100% auto;
+}
+#appstatus #build.box {
+    background-image: url('/static/images/build_workflow/wrench.png');
+    background-size: 100% auto;
+}
+#appstatus #test.box {
+    background: #ccc;
+    background-image: url('/static/images/build_workflow/beaker.png');
+    background-size: 100% auto;
+}
+#appstatus #package.box {
+    background-image: url('/static/images/build_workflow/docker.png');
+    background-size: 100% auto;
+}
+#appstatus #template.box {
+    background-image: url('/static/images/build_workflow/gear.png');
+    background-size: 100% auto;
+}
+#appstatus #deploy.box {
+    background-image: url('/static/images/build_workflow/fire.png');
+    background-size: 100% auto;
+}
+#appstatus #complete.box {
+    background-image: url('/static/images/build_workflow/check-mark.png');
+    background-size: 100% auto;
+}
+#appstatus .box.disabled {
+    background: #ccc;
+}
+#appstatus .box.active {
+    background: #63ebfa;
+}
+#appstatus .box.passed {
+    background: #94e894;
+}
+#appstatus .box.failed {
+    background: #ff6666;
+}
+#appstatus .box span {
+    position: absolute;
+    bottom: 0em;
+    left: 0em;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    font-size: 120%;
+    color: #fff;
+    opacity: 0.8;
+}
+#appstatus .status span {} div#appstatus {
+    background-color: #ededed;
+    vertical-align: middle;
+    margin-bottom: 1%;
+}
+div#controls {
+    text-align: center;
+}
+div#controls .control {
+    font-size: 120%;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+    display: inline;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
