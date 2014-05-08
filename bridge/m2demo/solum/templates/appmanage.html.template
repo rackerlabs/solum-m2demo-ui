@@ -26,8 +26,8 @@ Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a>
             <tr>
                 <th>1</th>
                 <td>{{ assembly.name }}</td>
-                <td>1.0.1</td>
-                <td>May 1, 2014, 2:12 p.m.</td>
+                <td>1.9.1</td>
+                <td>May 8 2014, 2:12 p.m.</td>
                 <td>
                     <input type="radio" name="image_select" value="1" checked>
                 </td>
@@ -36,7 +36,7 @@ Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a>
                 <th>2</th>
                 <td>{{ assembly.name }}</td>
                 <td>1.5.7</td>
-                <td>May 5 2014, 4:11 p.m.</td>
+                <td>May 7 2014, 4:11 p.m.</td>
                 <td>
                     <input type="radio" name="image_select" value="1">
                 </td>
@@ -44,8 +44,8 @@ Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a>
             <tr>
                 <th>3</th>
                 <td>{{ assembly.name }}</td>
-                <td>1.9.1</td>
-                <td>May 7 2014, 9:19 a.m.</td>
+                <td>1.0.3</td>
+                <td>May 5 2014, 9:19 a.m.</td>
                 <td>
                     <input type="radio" name="image_select" value="1">
                 </td>
