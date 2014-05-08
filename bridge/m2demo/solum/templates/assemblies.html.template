@@ -8,6 +8,8 @@
         var stat = '';
         var LAST_STATUS = '';
         var uuid = '';
+        
+        <!-- refresh assembly build status-->
         function refresh_status(){
           var assembly = getAssembly(uuid);
           if(assembly.status != LAST_STATUS){
@@ -23,8 +25,10 @@
         
         function stopStatus(){
             clearInterval(stat);
+            refresh_main_page();
         }
         
+        <!-- Get plan file from github repo. Return planfile or empty string-->
         function popGetPlanfile() {
             var githuburl = $("#githuburl").val();
             var plantext = getPlanFile(githuburl);
@@ -41,6 +45,16 @@
                 startStatus();
             }
         }
+        
+        <!-- Update manage button link when an assembly is selected -->
+        function radioOnClick(selectedApp){
+            document.getElementById('manage_app_link').href = '/solum/appmanage/' + selectedApp
+        }
+        
+        <!-- Refresh dashboard -->
+        function refresh_main_page(){
+            document.location.reload();
+        }
     </script>
 {% endblock %}
 {% block solumbody %}
@@ -53,7 +67,7 @@
                 <th>Description</th>
                 <th>App URL</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th>Select</th>
             </tr>
         </thead>
         <tbody>
@@ -66,13 +80,8 @@
                 <td><a href="{{ a.application_uri }}" target="_blank">{{ a.application_uri }}</a>
                 </td>
                 <td><a href="/solum/app/{{ a.uuid }}">{{ a.status }}</a></td>
-                <td>
-                    <a href="/solum/newapp?githuburl={{ a.git_url }}">
-                        <button class="btn btn-info btn-sm invisible" style="width:30%">Update</button>
-                    </a>
-                    <a href="/solum/appmanage/{{ a.uuid }}">
-                        <button class="btn btn-info btn-sm" style="width:30%">Manage</button>
-                    </a>
+                <td><span class='tab'>&nbsp;</span>
+                    <input type="radio" id="app_selected" name="app_select" value="{{ a.uuid }}" onclick="radioOnClick('{{ a.uuid }}')" checked>
                 </td>
             </tr>
             {% endfor %}
@@ -85,7 +94,9 @@
                 <td></td>
                 <td></td>
                 <td>
-                    <button class="btn btn-default btn-sm invisible" style="width:30%">Update</button>
+                    <a id="manage_app_link" href="/solum/appmanage/{{ a.uuid }}">
+                        <button id="manage_button" class="btn btn-info btn-sm" style="width:30%">Manage</button>
+                    </a>
                     <button class="btn btn-success" style="width:30%" data-toggle="modal" data-target="#myModal">New App</button>
                 </td>
             </tr>
@@ -108,7 +119,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="popGetPlanfile()">Next</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh_main_page()">Cancel</button>
                 </div>
             </div>
         </div>
@@ -131,4 +142,14 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        if($('input[name=app_select]:checked').val()){
+            radioOnClick($('input[name=app_select]:checked').val())
+            $('#manage_button').show();
+        } else {
+            $('#manage_button').hide();
+        }
+        
+    </script>
 {% endblock %}
