@@ -1,18 +1,19 @@
 {% extends "horizonish.template" %}
 {% block title %}Solum - Define Application{% endblock %}
 {% block extraheaddata %}
-<script src="/static/js/createjs-2013.12.12.min.js"></script>
-<script type="text/javascript" src="/static/js/solum-appdefine.js"></script>
-<script type="text/javascript" src="/static/js/solum-bridgecomm.js"></script>
-<script type="text/javascript">
-function solum_deployapp(){
-    var plantext = $("textarea#planfile_hidden").val();
-    var result = createApp(plantext);
-    var now = new Date();
-    var name = result.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes();
-    createAssembly(result.uri, name);
-}
-</script>
+    <script src="/static/js/createjs-2013.12.12.min.js"></script>
+    <script type="text/javascript" src="/static/js/solum-appdefine.js"></script>
+    <script type="text/javascript" src="/static/js/solum-bridgecomm.js"></script>
+    <script type="text/javascript">
+        function solum_deployapp(){
+            var plantext = $("textarea#planfile_hidden").val();
+            console.debug(plantext)
+            var result = createApp(plantext);
+            var now = new Date();
+            var name = result.name + '_' + now.getMonth() + '.' + now.getDate() + '_' + now.getHours() + '.' + now.getMinutes() + '_' + now.getSeconds();
+            createAssembly(result.uri, name);
+        }
+    </script>
 {% endblock %}
 {% block solumbody %}
 <div id="content_body">

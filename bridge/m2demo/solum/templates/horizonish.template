@@ -114,7 +114,7 @@
                             <div>
                                 <h4><div>Solum</div></h4>
                                 <ul style="display: none;">
-                                    <li><a href="/solum" class="active" tabindex="1">Applications</a>
+                                    <li><a href="/solum" tabindex="1">Applications</a>
                                     </li>
                                 </ul>
                             </div>
