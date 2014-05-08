@@ -83,14 +83,13 @@ Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a>
             </td>
 
            <td>
-                 <b>Memory Quota:</b>
-                <select style="width:100px">
-                    <option value="512MB">512 MB</option>
-                    <option value="1GB">1 GB</option>
-                    <option value="2GB">2 GB</option>
-                    <option value="4GB">4 GB</option>
-                    <option value="8GB">8 GB</option>
-                    <option value="16GB">16 GB</option>
+                 <b>Resource Flavor:</b>
+                <select style="width:125px">
+                    <option value="m1.tiny">m1.tiny</option>
+                    <option value="m1.small">m1.small</option>
+                    <option value="m1.medium">m1.medium</option>
+                    <option value="m1.large">m1.large</option>
+                    <option value="m1.xlarge">m1.xlarge</option>
                 </select>
                 &nbsp;&nbsp;
            </td>
@@ -98,6 +97,14 @@ Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a>
         </tr>
     </table>
     <table>
+            <td>
+                <div class="col-md-2 column">
+                        <button id="dep_button" 
+                                class="btn btn-danger" 
+                                style="width:200px">Rollback 1 Image Version</button>
+                </div>
+            </td>
+
             <td>
                 <div class="col-md-2 column">
                         <button id="dep_button" 
