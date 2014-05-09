@@ -20,16 +20,12 @@
     <script src="/static/js/solum-appstatus.js"></script>
     <script type="text/javascript">
         var stat = '';
-        var LAST_STATUS = '';
         var uuid = '';
         
         <!-- refresh assembly build status-->
         function refresh_status(){
           var assembly = getAssembly(uuid);
-          if(assembly.status != LAST_STATUS){
-            updateStatus(assembly.status);
-          }
-          LAST_STATUS = assembly.status;
+          updateStatus(assembly.status);
         }
 
         function startStatus(){
