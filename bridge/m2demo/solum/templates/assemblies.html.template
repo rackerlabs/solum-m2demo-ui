@@ -1,6 +1,20 @@
 {% extends "horizonish.template" %}
 {% block title %}Usage Overview - OpenStack Dashboard{% endblock %}
 {% block extraheaddata %}
+<style type="text/css">
+     #appstatus .box {
+        display: inline-block;
+        position: relative;
+        margin: 1%;
+        width: 63px;
+        height: 63px;
+        border: 1px solid #000;
+        background: #ccc;
+        text-align: center;
+        background-size: 100% auto;
+      }
+</style>
+    <link rel="stylesheet" type="text/css" href="/static/css/deploy-workflow.css">
     <script type="text/javascript" src="/static/js/solum-getplanfile.js"></script>
     <script src="/static/js/solum-bridgecomm.js"></script>
     <script src="/static/js/solum-appstatus.js"></script>
@@ -13,7 +27,7 @@
         function refresh_status(){
           var assembly = getAssembly(uuid);
           if(assembly.status != LAST_STATUS){
-            update_status(assembly.status);
+            updateStatus(assembly.status);
           }
           LAST_STATUS = assembly.status;
         }
@@ -43,6 +57,8 @@
                 $("#myModal").modal("hide");
                 $("#deployStatus").modal("show");
                 startStatus();
+                updateStatus('{{ assembly.status }}');
+                poll_interval = setInterval(refresh_status, 1000);
             }
         }
         
@@ -134,15 +150,56 @@
                     <h4 class="modal-title" id="myModalLabel">App Status</h4>
                 </div>
                 <div class="modal-body" style="white-space:nowrap">
-                    <canvas id="buildstatus" height="100" width="680"></canvas>
-                </div>
+                    <div id="appstatus">
+                        <abbr id="clone_abbr">
+                            <div id="clone" class="box"></div>
+                        </abbr>
+                        &#8674;
+
+                        <abbr id="build_abbr">
+                            <div id="build" class="box"></div>
+                        </abbr>
+                        &#8674;
+
+                        <abbr id="test_abbr">
+                            <div id="test" class="box"></div>
+                        </abbr>
+                        &#8674;
+
+                        <abbr id="package_abbr">
+                            <div id="package" class="box"></div>
+                        </abbr>
+                        &#8674;
+
+                        <abbr id="template_abbr">
+                            <div id="template" class="box"></div>
+                        </abbr>
+                        &#8674;
+
+                        <abbr id="deploy_abbr">
+                            <div id="deploy" class="box"></div>
+                        </abbr>
+                        &#8674;
+
+                        <abbr id="complete_abbr">
+                            <div id="complete" class="box"></div>
+                        </abbr>
+                    </div>
                 <div class="modal-footer">
+                    <span>
+                        <h4>Current status:</h4>
+                        <span id="currentstatus">
+                            Pending
+                        </span>
+                        <span id="workflow_tick">.</span>
+                    </span>
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="stopStatus()">Close</button>
                 </div>
             </div>
         </div>
     </div>
     
+    <script src="/static/js/solum-deploy-workflow.js"></script>
     <script>
         if($('input[name=app_select]:checked').val()){
             radioOnClick($('input[name=app_select]:checked').val())
@@ -150,6 +207,5 @@
         } else {
             $('#manage_button').hide();
         }
-        
     </script>
 {% endblock %}
