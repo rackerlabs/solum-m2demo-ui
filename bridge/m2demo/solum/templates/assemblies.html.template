@@ -186,8 +186,7 @@
                         <h4>Current status:</h4>
                         <span id="currentstatus">
                             Pending
-                        </span>
-                        <span id="workflow_tick">.</span>
+                        </span><span id="workflow_tick">.</span>
                     </span>
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="stopStatus()">Close</button>
                 </div>
