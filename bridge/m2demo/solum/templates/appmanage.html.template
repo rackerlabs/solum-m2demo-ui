@@ -100,7 +100,7 @@ Application URL: <a href="http://192.168.78.2:5000">http://192.168.78.2:5000</a>
             <td>
                 <div class="col-md-2 column">
                         <button id="dep_button" 
-                                class="btn btn-danger" 
+                                class="btn btn-info" 
                                 style="width:200px">Rollback 1 Image Version</button>
                 </div>
             </td>
