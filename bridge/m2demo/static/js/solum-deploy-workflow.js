@@ -71,7 +71,7 @@ function workflow_tick() {
 
 function startTicking() {
     if (!TICKING) {
-        TICK = setInterval(tick, 500);
+        TICK = setInterval(workflow_tick, 500);
         TICKING = true;
     }
 }

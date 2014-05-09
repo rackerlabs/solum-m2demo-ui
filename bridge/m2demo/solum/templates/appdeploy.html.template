@@ -1,6 +1,19 @@
 {% extends "horizonish.template" %}
 {% block title %}Solum - Manage Application{% endblock %}
 {% block extraheaddata %}
+<style type="text/css">
+     #appstatus .box {
+        display: inline-block;
+        position: relative;
+        margin: 1%;
+        width: 90px;
+        height: 90px;
+        border: 1px solid #000;
+        background: #ccc;
+        text-align: center;
+        background-size: 100% auto;
+      }
+</style>
 <script src="/static/js/solum-bridgecomm.js"></script>
 <script src="/static/js/solum-appstatus.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/deploy-workflow.css">
